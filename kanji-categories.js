@@ -33,22 +33,22 @@
 
 
 const THEMATIC_CATEGORIES = {
-  alam: { label: "Alam & Geografi", icon: "🌿" },
-  angka: { label: "Angka & Hitungan", icon: "🔢" },
-  tubuh: { label: "Tubuh & Kesehatan", icon: "🫀" },
-  waktu: { label: "Waktu & Kalender", icon: "🕐" },
-  arah: { label: "Arah & Posisi", icon: "🧭" },
-  orang: { label: "Orang & Keluarga", icon: "👥" },
-  makanan: { label: "Makanan & Minuman", icon: "🍵" },
-  aktivitas: { label: "Aktivitas & Gerakan", icon: "🏃" },
-  pendidikan: { label: "Pendidikan & Bahasa", icon: "📚" },
-  tempat: { label: "Transportasi & Tempat", icon: "🏘️" },
-  sifat: { label: "Sifat & Keadaan", icon: "📐" },
-  cuaca: { label: "Cuaca & Musim", icon: "🌤️" },
-  warna: { label: "Warna", icon: "🎨" },
-  kerja: { label: "Pekerjaan & Ekonomi", icon: "💼" },
-  hiburan: { label: "Hiburan & Media", icon: "🎬" },
-  abstrak: { label: "Kata Abstrak & Umum", icon: "💭" }
+  alam: { label: "Keluarga 山・川・火・水・木・土", icon: "🌿" },
+  angka: { label: "Keluarga 一・二・三・百・千・万", icon: "🔢" },
+  tubuh: { label: "Keluarga 口・目・手・足・体・病", icon: "🫀" },
+  waktu: { label: "Keluarga 月・年・今・朝・日・時", icon: "🕐" },
+  arah: { label: "Keluarga 上・下・左・右・中・東・西", icon: "🧭" },
+  orang: { label: "Keluarga 人・姉・妹・兄・弟・男・女", icon: "👥" },
+  makanan: { label: "Keluarga 米・飲・食・味・飯・茶", icon: "🍵" },
+  aktivitas: { label: "Keluarga 行・来・歩・走・乗・動", icon: "🏃" },
+  pendidikan: { label: "Keluarga 読・書・話・学・教・聞", icon: "📚" },
+  tempat: { label: "Keluarga 車・駅・道・店・家・電", icon: "🏘️" },
+  sifat: { label: "Keluarga 大・小・高・長・新・広", icon: "📐" },
+  cuaca: { label: "Keluarga 空・風・天・雪・春・冷", icon: "🌤️" },
+  warna: { label: "Keluarga 青・赤・銀・色・紅", icon: "🎨" },
+  kerja: { label: "Keluarga 金・生・会・働・社・作", icon: "💼" },
+  hiburan: { label: "Keluarga 歌・音・映・楽・写", icon: "🎬" },
+  abstrak: { label: "Keluarga 国・見・休・間・知・思", icon: "💭" }
 };
 
 const WORD_TYPE_CATEGORIES = {
