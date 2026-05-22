@@ -202,67 +202,6 @@
   }
   .sel-count strong { color: var(--accent); }
 
-  /* search */
-  .search-wrap {
-    position: relative;
-  }
-  .search-input {
-    width: 100%;
-    padding: 10px 14px 10px 38px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-size: 13px;
-    font-family: 'DM Sans', sans-serif;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .search-input:focus { border-color: var(--border2); }
-  .search-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text3);
-    font-size: 14px;
-    pointer-events: none;
-  }
-  .search-results {
-    margin-top: 10px;
-    max-height: 200px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .search-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.12s;
-  }
-  .search-item:hover { background: var(--surface2); }
-  .search-item.selected-item { background: rgba(232,201,122,0.08); }
-  .si-num { font-size: 11px; color: var(--text3); min-width: 28px; }
-  .si-kanji { font-family: 'Noto Serif JP', serif; font-size: 18px; color: var(--text); min-width: 48px; }
-  .si-kana { font-size: 12px; color: var(--text2); min-width: 110px; }
-  .si-meaning { font-size: 13px; color: var(--text2); flex: 1; }
-  .si-check {
-    width: 18px; height: 18px;
-    border-radius: 4px;
-    border: 1px solid var(--border2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px;
-    flex-shrink: 0;
-    color: transparent;
-    transition: all 0.15s;
-  }
-  .selected-item .si-check { background: var(--accent); border-color: var(--accent); color: #0f0e0d; }
-
   /* ── Quiz Screen ── */
   #screen-quiz {
     max-width: 640px;
@@ -544,6 +483,68 @@
     .card-main { font-size: 52px; }
     .header-stats { display: none; }
   }
+
+  /* ── Shuffle Toggle ── */
+  .shuffle-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .toggle-label {
+    font-size: 14px;
+    color: var(--text2);
+  }
+  .toggle-btn {
+    position: relative;
+    width: 48px;
+    height: 26px;
+    border-radius: 13px;
+    border: 1px solid var(--border2);
+    background: var(--surface2);
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0;
+  }
+  .toggle-btn.on {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .toggle-knob {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--text2);
+    transition: all 0.2s;
+  }
+  .toggle-btn.on .toggle-knob {
+    left: 25px;
+    background: #0f0e0d;
+  }
+
+  /* ── Nav Row ── */
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .btn-nav {
+    padding: 8px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-nav:hover { background: var(--surface2); color: var(--text); }
+  .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+  .btn-nav:disabled:hover { background: transparent; color: var(--text2); }
 </style>
 </head>
 <body>
@@ -582,23 +583,24 @@
   </div>
 
   <div>
-    <p class="section-title">Cari kanji spesifik</p>
-    <div class="panel">
-      <div class="search-wrap">
-        <span class="search-icon">🔍</span>
-        <input type="text" class="search-input" id="search-input" placeholder="Ketik kanji, hiragana, atau arti...">
-      </div>
-      <div class="search-results" id="search-results"></div>
-    </div>
-  </div>
-
-  <div>
     <p class="section-title">Mode kuis</p>
     <div class="panel">
       <div class="mode-group">
         <button class="mode-btn on" id="mode-k2a" onclick="setMode('k2a')">Kanji → Arti</button>
         <button class="mode-btn" id="mode-a2k" onclick="setMode('a2k')">Arti → Kanji</button>
         <button class="mode-btn" id="mode-mix" onclick="setMode('mix')">Campur</button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-title">Mode acak</p>
+    <div class="panel">
+      <div class="shuffle-toggle">
+        <label class="toggle-label">Acak urutan kartu</label>
+        <button class="toggle-btn" id="shuffle-toggle" onclick="toggleShuffle()">
+          <span class="toggle-knob"></span>
+        </button>
       </div>
     </div>
   </div>
@@ -618,10 +620,15 @@
   <div class="quiz-header">
     <button class="btn btn-sm" onclick="backToSelect()">← Kembali</button>
     <span class="quiz-counter" id="quiz-counter"><strong>1</strong> / 1</span>
-    <button class="btn btn-sm" onclick="shuffleAndRestart()">Acak ulang</button>
+    <button class="btn btn-sm" id="shuffle-restart-btn" onclick="shuffleAndRestart()" style="display:none">Acak ulang</button>
   </div>
 
   <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+
+  <div class="nav-row">
+    <button class="btn btn-nav" id="btn-prev" onclick="prevCard()">← Sebelumnya</button>
+    <button class="btn btn-nav" id="btn-next" onclick="nextCard()">Sesudahnya →</button>
+  </div>
 
   <div class="card-wrap">
     <div class="card" id="flashcard" onclick="flipCard()">
@@ -644,6 +651,8 @@
 
   <div class="keyboard-hints">
     <span class="kh"><kbd class="kbd">Space</kbd> balik kartu</span>
+    <span class="kh"><kbd class="kbd">←</kbd> sebelumnya</span>
+    <span class="kh"><kbd class="kbd">→</kbd> sesudahnya</span>
     <span class="kh"><kbd class="kbd">1</kbd> belum tahu</span>
     <span class="kh"><kbd class="kbd">2</kbd> tahu</span>
   </div>
@@ -742,6 +751,7 @@ const CATS=[
 ];
 
 let selected=new Set(), mode='k2a', deck=[], idx=0, flipped=false, knowN=0, unknownN=0, unknownCards=[];
+let shuffleOn=false;
 
 function init(){
   CATS.forEach(c=>{
@@ -751,8 +761,13 @@ function init(){
     document.getElementById('cat-chips').appendChild(b);
   });
   applyRange();
-  document.getElementById('search-input').addEventListener('input', doSearch);
   document.addEventListener('keydown', onKey);
+}
+
+function toggleShuffle(){
+  shuffleOn=!shuffleOn;
+  document.getElementById('shuffle-toggle').classList.toggle('on',shuffleOn);
+  document.getElementById('shuffle-restart-btn').style.display=shuffleOn?'inline-block':'none';
 }
 
 function applyRange(){
@@ -788,27 +803,6 @@ function setMode(m){
   ['k2a','a2k','mix'].forEach(x=>document.getElementById('mode-'+x).classList.toggle('on',x===m));
 }
 
-function doSearch(){
-  const q=document.getElementById('search-input').value.toLowerCase().trim();
-  const res=document.getElementById('search-results');
-  res.innerHTML='';
-  if(!q){return;}
-  const hits=RAW.filter(r=>r[1].includes(q)||r[2].includes(q)||r[3].toLowerCase().includes(q)).slice(0,30);
-  hits.forEach(r=>{
-    const d=document.createElement('div');
-    d.className='search-item'+(selected.has(r[0])?' selected-item':'');
-    d.innerHTML=`<span class="si-num">${r[0]}</span><span class="si-kanji">${r[1]}</span><span class="si-kana">${r[2]}</span><span class="si-meaning">${r[3]}</span><span class="si-check">${selected.has(r[0])?'✓':''}</span>`;
-    d.onclick=()=>toggleOne(r[0],d);
-    res.appendChild(d);
-  });
-}
-
-function toggleOne(id,el){
-  if(selected.has(id)){selected.delete(id);el.classList.remove('selected-item');el.querySelector('.si-check').textContent='';}
-  else{selected.add(id);el.classList.add('selected-item');el.querySelector('.si-check').textContent='✓';}
-  updateCatChips(); updateCount();
-}
-
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-'+id).classList.add('active');
@@ -816,7 +810,8 @@ function showScreen(id){
 
 function startQuiz(){
   if(!selected.size){alert('Pilih minimal 1 kanji!');return;}
-  deck=shuffle(RAW.filter(r=>selected.has(r[0])));
+  deck=RAW.filter(r=>selected.has(r[0]));
+  if(shuffleOn) deck=shuffle([...deck]);
   idx=0;knowN=0;unknownN=0;unknownCards=[];
   showScreen('quiz'); renderCard();
 }
@@ -824,6 +819,23 @@ function startQuiz(){
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 function shuffleAndRestart(){deck=shuffle([...deck]);idx=0;knowN=0;unknownN=0;unknownCards=[];renderCard();}
+
+function prevCard(){
+  if(idx<=0) return;
+  idx--;
+  renderCard();
+}
+
+function nextCard(){
+  if(idx>=deck.length-1) return;
+  idx++;
+  renderCard();
+}
+
+function updateNavButtons(){
+  document.getElementById('btn-prev').disabled=(idx<=0);
+  document.getElementById('btn-next').disabled=(idx>=deck.length-1);
+}
 
 let cardMode='k2a';
 function renderCard(){
@@ -845,6 +857,7 @@ function renderCard(){
   document.getElementById('flip-hint').style.display='block';
   document.getElementById('rating-row').classList.remove('visible');
   updateProgress();
+  updateNavButtons();
 }
 
 function flipCard(){
@@ -887,10 +900,15 @@ function showResult(){
 
 function retryUnknown(){
   if(!unknownCards.length){alert('Semua sudah tahu!');return;}
-  deck=shuffle([...unknownCards]);idx=0;knowN=0;unknownN=0;unknownCards=[];
+  deck=shuffleOn?shuffle([...unknownCards]):[...unknownCards];
+  idx=0;knowN=0;unknownN=0;unknownCards=[];
   showScreen('quiz');renderCard();
 }
-function retryAll(){deck=shuffle([...deck]);idx=0;knowN=0;unknownN=0;unknownCards=[];showScreen('quiz');renderCard();}
+function retryAll(){
+  deck=shuffleOn?shuffle([...deck]):[...deck];
+  idx=0;knowN=0;unknownN=0;unknownCards=[];
+  showScreen('quiz');renderCard();
+}
 function backToSelect(){showScreen('select');}
 
 function onKey(e){
@@ -898,6 +916,8 @@ function onKey(e){
   if(!q.classList.contains('active')) return;
   if(e.target.tagName==='INPUT') return;
   if(e.code==='Space'){e.preventDefault();flipCard();}
+  else if(e.code==='ArrowLeft'){e.preventDefault();prevCard();}
+  else if(e.code==='ArrowRight'){e.preventDefault();nextCard();}
   else if(e.key==='1'&&flipped){rate(false);}
   else if(e.key==='2'&&flipped){rate(true);}
 }
