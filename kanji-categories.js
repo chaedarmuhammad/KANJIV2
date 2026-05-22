@@ -1,6 +1,10 @@
 /**
  * Kanji Categories - Dual Tag System
  * 
+ * ATURAN KATEGORI TEMATIK:
+ * Semua kanji turunan mengikuti kategori kanji induk/tunggalnya.
+ * Contoh: お土産 (oleh-oleh) ikut kategori 土 (tanah) = Alam & Geografi
+ * 
  * KATEGORI TEMATIK (Topik):
  * 1. alam        - Alam & Geografi
  * 2. angka       - Angka & Hitungan
@@ -56,284 +60,192 @@ const WORD_TYPE_CATEGORIES = {
 };
 
 
-// Mapping: kanji ID → kategori tematik
-const THEMATIC_MAP = {
-  // Alam & Geografi (山, 川, 火, 水, 木, 土, 林, 森, 海, 池, 田, 花, 地)
-  1:"alam", 2:"alam", 3:"alam", 4:"alam", 5:"alam",
-  6:"alam", 7:"alam", 9:"alam", 12:"alam",
-  13:"alam", 20:"alam", 22:"alam",
-  143:"alam", 144:"alam", 145:"alam",
-  155:"alam", 156:"alam", 190:"alam",
-  283:"alam", 284:"alam",
-  575:"alam", 576:"alam", 577:"alam", 578:"alam", 579:"alam",
-  650:"alam", 651:"alam", 652:"alam", 653:"alam",
 
-  // Angka & Hitungan
+// Mapping: kanji ID → kategori tematik
+// ATURAN: Semua turunan mengikuti kategori kanji induk/tunggalnya
+const THEMATIC_MAP = {
+  // Alam & Geografi (山, 川, 火, 水, 木, 土, 林, 森, 海, 池, 田, 地, 花)
+  1:"alam", 2:"alam", 3:"alam", 4:"alam", 5:"alam",
+  6:"alam", 7:"alam", 8:"alam", 9:"alam", 10:"alam",
+  11:"alam", 12:"alam", 13:"alam", 14:"alam", 20:"alam",
+  21:"alam", 22:"alam", 23:"alam", 143:"alam", 144:"alam",
+  145:"alam", 155:"alam", 156:"alam", 190:"alam", 283:"alam",
+  284:"alam", 575:"alam", 576:"alam", 577:"alam", 578:"alam",
+  579:"alam", 650:"alam", 651:"alam", 652:"alam", 653:"alam",
+
+  // Angka & Hitungan (一, 二, 三, 四, 五, 六, 七, 八, 九, 十, 百, 千, 万, 分, 番)
   24:"angka", 25:"angka", 26:"angka", 27:"angka", 28:"angka",
   29:"angka", 30:"angka", 31:"angka", 32:"angka", 33:"angka",
   34:"angka", 35:"angka", 36:"angka", 37:"angka", 38:"angka",
   39:"angka", 40:"angka", 41:"angka", 42:"angka", 43:"angka",
-  44:"angka", 88:"angka", 89:"angka",
-  556:"angka", 557:"angka",
+  44:"angka", 88:"angka", 89:"angka", 556:"angka", 557:"angka",
 
 
-  // Tubuh & Kesehatan (口, 目, 耳, 手, 足, 首, 指, 背, 腹, 体, 頭, 顔, 病, 痛, 薬, 医)
+  // Tubuh & Kesehatan (口, 目, 耳, 手, 足, 力, 体, 薬, 熱, 首, 指, 背, 頭, 顔, 声, 病, 腹, 医, 痛)
   45:"tubuh", 46:"tubuh", 47:"tubuh", 48:"tubuh", 49:"tubuh",
   50:"tubuh", 51:"tubuh", 52:"tubuh", 53:"tubuh", 54:"tubuh",
   55:"tubuh", 146:"tubuh", 147:"tubuh", 148:"tubuh", 149:"tubuh",
-  188:"tubuh", 189:"tubuh", 194:"tubuh", 195:"tubuh",
-  205:"tubuh", 206:"tubuh", 207:"tubuh", 208:"tubuh",
-  241:"tubuh", 242:"tubuh", 243:"tubuh", 244:"tubuh", 245:"tubuh",
-  313:"tubuh", 314:"tubuh", 315:"tubuh",
-  440:"tubuh", 441:"tubuh", 442:"tubuh",
-  520:"tubuh", 521:"tubuh", 522:"tubuh",
-  614:"tubuh", 615:"tubuh", 616:"tubuh",
-  231:"tubuh",
+  188:"tubuh", 189:"tubuh", 194:"tubuh", 195:"tubuh", 205:"tubuh",
+  206:"tubuh", 207:"tubuh", 208:"tubuh", 241:"tubuh", 242:"tubuh",
+  243:"tubuh", 244:"tubuh", 245:"tubuh", 313:"tubuh", 314:"tubuh",
+  315:"tubuh", 440:"tubuh", 441:"tubuh", 442:"tubuh", 520:"tubuh",
+  521:"tubuh", 522:"tubuh", 614:"tubuh", 615:"tubuh", 616:"tubuh",
 
-  // Waktu & Kalender (月, 日, 年, 朝, 昼, 夜, 今, 毎, 時, 午, 晩, 曜日)
-  8:"waktu", 11:"waktu", 14:"waktu", 18:"waktu", 23:"waktu",
-  56:"waktu", 57:"waktu", 93:"waktu", 94:"waktu",
-  196:"waktu", 197:"waktu", 198:"waktu", 199:"waktu",
-  200:"waktu", 201:"waktu",
-  232:"waktu", 233:"waktu", 234:"waktu", 235:"waktu",
-  236:"waktu", 237:"waktu", 239:"waktu",
-  318:"waktu", 320:"waktu",
-  366:"waktu", 367:"waktu", 368:"waktu", 369:"waktu",
-  370:"waktu", 371:"waktu", 372:"waktu", 373:"waktu",
-  482:"waktu", 483:"waktu", 484:"waktu", 485:"waktu", 486:"waktu",
-  490:"waktu", 491:"waktu", 492:"waktu", 493:"waktu",
-  497:"waktu", 498:"waktu",
+  // Waktu & Kalender (月, 年, 今, 朝, 昼, 夜, 毎, 日, 時, 午, 晩)
+  56:"waktu", 57:"waktu", 93:"waktu", 94:"waktu", 196:"waktu",
+  197:"waktu", 198:"waktu", 199:"waktu", 200:"waktu", 201:"waktu",
+  232:"waktu", 233:"waktu", 234:"waktu", 235:"waktu", 236:"waktu",
+  237:"waktu", 366:"waktu", 367:"waktu", 368:"waktu", 369:"waktu",
+  370:"waktu", 371:"waktu", 372:"waktu", 373:"waktu", 374:"waktu",
+  375:"waktu", 376:"waktu", 482:"waktu", 483:"waktu", 484:"waktu",
+  485:"waktu", 486:"waktu", 490:"waktu", 491:"waktu", 492:"waktu",
+  493:"waktu", 497:"waktu", 498:"waktu",
 
 
-  // Arah & Posisi (上, 下, 左, 右, 中, 前, 東, 西, 南, 北, 内, 外, 近, 遠)
+  // Arah & Posisi (上, 下, 左, 右, 中, 東, 西, 南, 北, 前, 外, 内, 近, 後, 遠)
   58:"arah", 59:"arah", 60:"arah", 61:"arah", 62:"arah",
-  63:"arah", 64:"arah", 65:"arah", 66:"arah",
-  67:"arah", 68:"arah", 69:"arah", 70:"arah",
-  162:"arah", 163:"arah", 164:"arah", 165:"arah",
-  166:"arah", 167:"arah", 168:"arah",
-  169:"arah", 170:"arah", 171:"arah", 172:"arah",
-  173:"arah", 175:"arah", 176:"arah", 177:"arah",
-  246:"arah", 247:"arah",
-  298:"arah", 299:"arah", 300:"arah", 301:"arah",
-  541:"arah", 542:"arah", 543:"arah",
-  660:"arah", 661:"arah", 662:"arah",
+  63:"arah", 64:"arah", 65:"arah", 66:"arah", 67:"arah",
+  68:"arah", 69:"arah", 70:"arah", 162:"arah", 163:"arah",
+  164:"arah", 165:"arah", 166:"arah", 167:"arah", 168:"arah",
+  169:"arah", 170:"arah", 171:"arah", 172:"arah", 173:"arah",
+  174:"arah", 175:"arah", 176:"arah", 177:"arah", 246:"arah",
+  247:"arah", 298:"arah", 299:"arah", 300:"arah", 301:"arah",
+  541:"arah", 542:"arah", 543:"arah", 660:"arah", 661:"arah",
+  662:"arah",
 
-  // Orang & Keluarga (人, 私, 兄, 弟, 姉, 妹, 妻, 男, 女, 若)
-  85:"orang", 86:"orang", 87:"orang",
-  191:"orang", 192:"orang", 193:"orang",
-  248:"orang", 249:"orang", 250:"orang", 251:"orang",
-  309:"orang", 310:"orang", 311:"orang", 312:"orang",
-  335:"orang",
-  589:"orang", 590:"orang", 591:"orang", 592:"orang", 593:"orang",
-  72:"orang",
+  // Orang & Keluarga (人, 姉, 妹, 私, 兄, 弟, 妻, 若, 女, 男)
+  85:"orang", 86:"orang", 87:"orang", 191:"orang", 192:"orang",
+  193:"orang", 248:"orang", 249:"orang", 250:"orang", 251:"orang",
+  309:"orang", 310:"orang", 311:"orang", 312:"orang", 589:"orang",
+  590:"orang", 591:"orang", 592:"orang", 593:"orang",
 
 
-  // Makanan & Minuman (飲, 食, 飯, 茶, 米, 料理, 野菜)
-  113:"makanan", 114:"makanan",
-  115:"makanan", 116:"makanan", 117:"makanan",
-  118:"makanan", 119:"makanan", 120:"makanan",
-  252:"makanan", 413:"makanan",
-  503:"makanan", 504:"makanan",
-  509:"makanan", 510:"makanan",
-  536:"makanan",
-  639:"makanan",
+  // Makanan & Minuman (米, 飲, 食, 味, 飯, 茶, 料)
+  113:"makanan", 114:"makanan", 115:"makanan", 116:"makanan", 117:"makanan",
+  118:"makanan", 119:"makanan", 120:"makanan", 252:"makanan", 253:"makanan",
+  254:"makanan", 503:"makanan", 504:"makanan", 509:"makanan", 510:"makanan",
   663:"makanan", 664:"makanan", 665:"makanan",
 
-  // Aktivitas & Gerakan (行, 来, 出, 入, 歩, 走, 乗, 降, 通, 帰, 返, 送, 運, 散歩, 動)
-  106:"aktivitas", 107:"aktivitas",
-  108:"aktivitas", 109:"aktivitas", 110:"aktivitas", 111:"aktivitas", 112:"aktivitas",
-  270:"aktivitas", 271:"aktivitas",
-  276:"aktivitas", 277:"aktivitas", 278:"aktivitas",
-  279:"aktivitas", 280:"aktivitas", 281:"aktivitas", 282:"aktivitas",
-  293:"aktivitas", 294:"aktivitas",
-  350:"aktivitas", 351:"aktivitas",
-  384:"aktivitas", 385:"aktivitas", 386:"aktivitas", 387:"aktivitas",
-  388:"aktivitas", 389:"aktivitas",
-  395:"aktivitas", 396:"aktivitas",
-  419:"aktivitas", 420:"aktivitas", 421:"aktivitas",
-  428:"aktivitas", 429:"aktivitas", 430:"aktivitas", 431:"aktivitas",
-  565:"aktivitas", 566:"aktivitas", 567:"aktivitas",
-  586:"aktivitas", 587:"aktivitas", 588:"aktivitas",
-  602:"aktivitas", 603:"aktivitas", 604:"aktivitas",
-  605:"aktivitas", 606:"aktivitas", 607:"aktivitas",
-  657:"aktivitas", 658:"aktivitas", 659:"aktivitas",
+  // Aktivitas & Gerakan (行, 来, 歩, 降, 通, 送, 到, 散, 進, 持, 走, 乗, 運, 閉, 洗, 返, 動, 止, 出, 帰)
+  106:"aktivitas", 107:"aktivitas", 108:"aktivitas", 109:"aktivitas", 110:"aktivitas",
+  111:"aktivitas", 112:"aktivitas", 270:"aktivitas", 271:"aktivitas", 276:"aktivitas",
+  277:"aktivitas", 278:"aktivitas", 279:"aktivitas", 280:"aktivitas", 281:"aktivitas",
+  282:"aktivitas", 293:"aktivitas", 294:"aktivitas", 350:"aktivitas", 351:"aktivitas",
+  384:"aktivitas", 385:"aktivitas", 386:"aktivitas", 387:"aktivitas", 388:"aktivitas",
+  389:"aktivitas", 395:"aktivitas", 396:"aktivitas", 419:"aktivitas", 420:"aktivitas",
+  421:"aktivitas", 428:"aktivitas", 429:"aktivitas", 430:"aktivitas", 431:"aktivitas",
+  436:"aktivitas", 437:"aktivitas", 438:"aktivitas", 439:"aktivitas", 466:"aktivitas",
+  467:"aktivitas", 565:"aktivitas", 566:"aktivitas", 567:"aktivitas", 586:"aktivitas",
+  587:"aktivitas", 588:"aktivitas", 602:"aktivitas", 603:"aktivitas", 604:"aktivitas",
+  605:"aktivitas", 606:"aktivitas", 607:"aktivitas", 657:"aktivitas", 658:"aktivitas",
+  659:"aktivitas",
 
 
-  // Pendidikan & Bahasa (学, 教, 勉, 試, 校, 字, 文, 問, 読, 書, 話, 句, 単語, 言, 英)
-  121:"pendidikan", 122:"pendidikan", 123:"pendidikan",
-  124:"pendidikan", 125:"pendidikan", 126:"pendidikan", 127:"pendidikan",
-  128:"pendidikan", 129:"pendidikan",
-  132:"pendidikan", 133:"pendidikan", 134:"pendidikan",
-  135:"pendidikan", 136:"pendidikan", 137:"pendidikan",
-  150:"pendidikan", 151:"pendidikan", 152:"pendidikan",
-  153:"pendidikan", 154:"pendidikan",
-  307:"pendidikan", 308:"pendidikan",
-  302:"pendidikan", 303:"pendidikan", 304:"pendidikan",
-  374:"pendidikan", 375:"pendidikan",
-  398:"pendidikan",
-  401:"pendidikan", 402:"pendidikan", 403:"pendidikan",
-  404:"pendidikan", 405:"pendidikan", 406:"pendidikan", 407:"pendidikan",
-  408:"pendidikan", 409:"pendidikan",
-  432:"pendidikan", 433:"pendidikan",
-  434:"pendidikan", 435:"pendidikan",
-  470:"pendidikan", 471:"pendidikan",
-  487:"pendidikan", 488:"pendidikan", 489:"pendidikan",
-  506:"pendidikan",
-  598:"pendidikan", 599:"pendidikan",
-  641:"pendidikan", 642:"pendidikan", 643:"pendidikan",
-  644:"pendidikan", 645:"pendidikan", 646:"pendidikan",
-  666:"pendidikan", 667:"pendidikan",
-  671:"pendidikan", 672:"pendidikan",
+  // Pendidikan & Bahasa (読, 句, 書, 話, 学, 字, 試, 校, 問, 発, 勉, 卒, 答, 英, 教, 言, 単, 聞, 本, 受)
+  121:"pendidikan", 122:"pendidikan", 123:"pendidikan", 124:"pendidikan", 125:"pendidikan",
+  126:"pendidikan", 127:"pendidikan", 128:"pendidikan", 129:"pendidikan", 132:"pendidikan",
+  133:"pendidikan", 134:"pendidikan", 135:"pendidikan", 136:"pendidikan", 137:"pendidikan",
+  150:"pendidikan", 151:"pendidikan", 152:"pendidikan", 153:"pendidikan", 154:"pendidikan",
+  302:"pendidikan", 303:"pendidikan", 304:"pendidikan", 307:"pendidikan", 308:"pendidikan",
+  401:"pendidikan", 402:"pendidikan", 403:"pendidikan", 404:"pendidikan", 405:"pendidikan",
+  406:"pendidikan", 407:"pendidikan", 408:"pendidikan", 409:"pendidikan", 432:"pendidikan",
+  433:"pendidikan", 434:"pendidikan", 435:"pendidikan", 470:"pendidikan", 471:"pendidikan",
+  487:"pendidikan", 488:"pendidikan", 489:"pendidikan", 598:"pendidikan", 599:"pendidikan",
+  642:"pendidikan", 643:"pendidikan", 644:"pendidikan", 645:"pendidikan", 646:"pendidikan",
+  666:"pendidikan", 667:"pendidikan", 671:"pendidikan", 672:"pendidikan",
+
+  // Transportasi & Tempat (車, 駅, 道, 旅, 店, 所, 市, 町, 村, 郵, 住, 宿, 家, 電, 借)
+  130:"tempat", 131:"tempat", 157:"tempat", 158:"tempat", 209:"tempat",
+  210:"tempat", 211:"tempat", 212:"tempat", 213:"tempat", 214:"tempat",
+  215:"tempat", 255:"tempat", 256:"tempat", 257:"tempat", 258:"tempat",
+  259:"tempat", 260:"tempat", 261:"tempat", 330:"tempat", 331:"tempat",
+  415:"tempat", 416:"tempat", 417:"tempat", 418:"tempat", 505:"tempat",
+  506:"tempat", 513:"tempat", 514:"tempat", 515:"tempat", 568:"tempat",
+  569:"tempat", 570:"tempat", 571:"tempat", 572:"tempat", 573:"tempat",
+  574:"tempat", 681:"tempat", 682:"tempat", 683:"tempat",
 
 
-  // Transportasi & Tempat (車, 駅, 道, 店, 家, 所, 市, 町, 村, 宿, 住)
-  130:"tempat", 131:"tempat",
-  157:"tempat", 158:"tempat",
-  209:"tempat", 210:"tempat",
-  211:"tempat", 212:"tempat", 213:"tempat", 214:"tempat", 215:"tempat",
-  255:"tempat", 256:"tempat", 257:"tempat", 258:"tempat",
-  259:"tempat", 260:"tempat", 261:"tempat",
-  297:"tempat",
-  330:"tempat", 331:"tempat",
-  415:"tempat", 416:"tempat", 417:"tempat", 418:"tempat",
-  456:"tempat", 458:"tempat", 459:"tempat",
-  505:"tempat",
-  513:"tempat", 514:"tempat", 515:"tempat",
-  568:"tempat", 569:"tempat", 570:"tempat", 571:"tempat",
-  572:"tempat", 573:"tempat", 574:"tempat",
-  226:"tempat",
-  439:"tempat", 676:"tempat",
-  681:"tempat", 682:"tempat", 683:"tempat",
-
-  // Sifat & Keadaan (大, 小, 高, 低, 長, 多, 少, 古, 新, 広, 軽, 重, 早)
-  71:"sifat", 73:"sifat", 74:"sifat", 75:"sifat", 76:"sifat",
-  78:"sifat", 82:"sifat", 83:"sifat", 84:"sifat",
-  285:"sifat", 286:"sifat", 287:"sifat",
-  334:"sifat", 336:"sifat",
-  363:"sifat", 364:"sifat", 365:"sifat",
-  377:"sifat", 378:"sifat", 379:"sifat",
-  443:"sifat", 444:"sifat",
-  448:"sifat", 449:"sifat",
-  451:"sifat", 452:"sifat",
-  526:"sifat", 527:"sifat", 528:"sifat",
-  547:"sifat", 548:"sifat",
-  621:"sifat", 622:"sifat",
+  // Sifat & Keadaan (大, 小, 多, 長, 低, 少, 軽, 重, 早, 高, 古, 新, 広)
+  71:"sifat", 72:"sifat", 73:"sifat", 74:"sifat", 75:"sifat",
+  76:"sifat", 77:"sifat", 78:"sifat", 79:"sifat", 80:"sifat",
+  81:"sifat", 82:"sifat", 83:"sifat", 84:"sifat", 285:"sifat",
+  286:"sifat", 287:"sifat", 334:"sifat", 335:"sifat", 336:"sifat",
+  363:"sifat", 364:"sifat", 365:"sifat", 377:"sifat", 378:"sifat",
+  379:"sifat", 443:"sifat", 444:"sifat", 448:"sifat", 449:"sifat",
+  450:"sifat", 451:"sifat", 452:"sifat", 526:"sifat", 527:"sifat",
+  528:"sifat", 547:"sifat", 548:"sifat", 621:"sifat", 622:"sifat",
   625:"sifat", 626:"sifat", 627:"sifat", 628:"sifat",
 
+  // Cuaca & Musim (曇, 雪, 春, 夏, 冬, 空, 風, 天, 寒, 温, 暖, 気, 季, 冷, 暑)
+  202:"cuaca", 203:"cuaca", 204:"cuaca", 219:"cuaca", 220:"cuaca",
+  221:"cuaca", 222:"cuaca", 223:"cuaca", 224:"cuaca", 225:"cuaca",
+  226:"cuaca", 227:"cuaca", 228:"cuaca", 229:"cuaca", 230:"cuaca",
+  231:"cuaca", 266:"cuaca", 267:"cuaca", 461:"cuaca", 462:"cuaca",
+  463:"cuaca", 474:"cuaca", 475:"cuaca", 476:"cuaca", 477:"cuaca",
+  523:"cuaca", 524:"cuaca", 525:"cuaca", 549:"cuaca", 550:"cuaca",
+  600:"cuaca", 601:"cuaca", 629:"cuaca", 630:"cuaca", 631:"cuaca",
+  632:"cuaca", 633:"cuaca", 647:"cuaca", 648:"cuaca", 649:"cuaca",
 
-  // Cuaca & Musim (天, 風, 雪, 曇, 寒, 暑, 暖, 温, 冷, 春, 夏, 冬, 季, 空)
-  202:"cuaca", 203:"cuaca", 204:"cuaca",
-  219:"cuaca", 220:"cuaca", 221:"cuaca", 222:"cuaca",
-  223:"cuaca", 224:"cuaca", 225:"cuaca",
-  227:"cuaca", 228:"cuaca", 229:"cuaca", 230:"cuaca",
-  266:"cuaca", 267:"cuaca",
-  461:"cuaca", 462:"cuaca", 463:"cuaca",
-  474:"cuaca", 475:"cuaca", 476:"cuaca", 477:"cuaca",
-  523:"cuaca", 524:"cuaca", 525:"cuaca",
-  549:"cuaca",
-  600:"cuaca", 601:"cuaca",
-  629:"cuaca", 630:"cuaca", 631:"cuaca", 632:"cuaca", 633:"cuaca",
-  647:"cuaca", 648:"cuaca", 649:"cuaca",
 
   // Warna (青, 赤, 銀, 色, 紅)
-  181:"warna", 182:"warna", 183:"warna",
-  184:"warna", 185:"warna", 186:"warna", 187:"warna",
-  216:"warna", 218:"warna",
-  263:"warna",
-  638:"warna",
+  181:"warna", 182:"warna", 183:"warna", 184:"warna", 185:"warna",
+  186:"warna", 187:"warna", 216:"warna", 217:"warna", 218:"warna",
+  263:"warna", 638:"warna", 639:"warna",
 
-  // Pekerjaan & Ekonomi (金, 働, 会社, 仕事, 職, 工, 農, 産, 売, 借)
-  15:"kerja", 16:"kerja", 17:"kerja", 19:"kerja",
-  95:"kerja", 96:"kerja", 97:"kerja",
-  98:"kerja", 99:"kerja", 100:"kerja", 101:"kerja",
-  264:"kerja", 265:"kerja",
-  295:"kerja", 296:"kerja",
-  332:"kerja", 333:"kerja",
-  464:"kerja", 465:"kerja",
-  468:"kerja", 469:"kerja",
-  478:"kerja", 479:"kerja",
-  529:"kerja", 530:"kerja",
-  537:"kerja", 538:"kerja", 539:"kerja", 540:"kerja",
-  654:"kerja", 655:"kerja", 656:"kerja",
-  668:"kerja", 669:"kerja", 670:"kerja",
+  // Pekerjaan & Ekonomi (金, 生, 会, 働, 部, 社, 工, 職, 農, 産, 作, 売, 仕)
+  15:"kerja", 16:"kerja", 17:"kerja", 18:"kerja", 19:"kerja",
+  95:"kerja", 96:"kerja", 97:"kerja", 98:"kerja", 99:"kerja",
+  100:"kerja", 101:"kerja", 264:"kerja", 265:"kerja", 295:"kerja",
+  296:"kerja", 297:"kerja", 332:"kerja", 333:"kerja", 464:"kerja",
+  465:"kerja", 468:"kerja", 469:"kerja", 478:"kerja", 479:"kerja",
+  529:"kerja", 530:"kerja", 537:"kerja", 538:"kerja", 539:"kerja",
+  540:"kerja", 654:"kerja", 655:"kerja", 656:"kerja", 668:"kerja",
+  669:"kerja", 670:"kerja",
 
-
-  // Hiburan & Media (映, 歌, 音, 写真, 放送, 楽)
-  178:"hiburan", 179:"hiburan", 180:"hiburan",
-  518:"hiburan", 519:"hiburan",
-  554:"hiburan", 555:"hiburan",
-  560:"hiburan", 561:"hiburan", 562:"hiburan",
-  563:"hiburan", 564:"hiburan",
-  580:"hiburan", 581:"hiburan", 582:"hiburan",
+  // Hiburan & Media (歌, 音, 放, 映, 楽, 写)
+  178:"hiburan", 179:"hiburan", 180:"hiburan", 518:"hiburan", 519:"hiburan",
+  554:"hiburan", 555:"hiburan", 560:"hiburan", 561:"hiburan", 562:"hiburan",
+  563:"hiburan", 564:"hiburan", 580:"hiburan", 581:"hiburan", 582:"hiburan",
   610:"hiburan", 611:"hiburan",
-  254:"hiburan", 414:"hiburan",
 
-  // Kata Abstrak & Umum
-  10:"abstrak", 21:"abstrak",
-  77:"abstrak", 79:"abstrak", 80:"abstrak", 81:"abstrak",
-  90:"abstrak", 91:"abstrak", 92:"abstrak",
-  102:"abstrak", 103:"abstrak", 104:"abstrak", 105:"abstrak",
-  138:"abstrak", 139:"abstrak", 140:"abstrak", 141:"abstrak", 142:"abstrak",
-  159:"abstrak", 160:"abstrak", 161:"abstrak",
-  174:"abstrak", 253:"abstrak",
-  262:"abstrak", 268:"abstrak", 269:"abstrak",
-  272:"abstrak", 273:"abstrak", 274:"abstrak", 275:"abstrak",
+
+  // Kata Abstrak & Umum (国, 見, 休, 間, 方, 紙, 太, 元, 知, 使, 明, 最, 正, 有, 注, 信, 終, 悪, 過, 変, 光, 安, 着, 不, 経, 先, 死, 野, 待, 別, 用, 自, 事, 限, 急, 思, 便, 禁, 説, 同, 好, 特, 集, 様, 始, 利, 押, 訪, 理, 世, 浴, 泣, 調, 質, 開, 起)
+  90:"abstrak", 91:"abstrak", 92:"abstrak", 102:"abstrak", 103:"abstrak",
+  104:"abstrak", 105:"abstrak", 138:"abstrak", 139:"abstrak", 140:"abstrak",
+  141:"abstrak", 142:"abstrak", 159:"abstrak", 160:"abstrak", 161:"abstrak",
+  238:"abstrak", 239:"abstrak", 240:"abstrak", 262:"abstrak", 268:"abstrak",
+  269:"abstrak", 272:"abstrak", 273:"abstrak", 274:"abstrak", 275:"abstrak",
   288:"abstrak", 289:"abstrak", 290:"abstrak", 291:"abstrak", 292:"abstrak",
-  305:"abstrak", 306:"abstrak",
-  316:"abstrak", 317:"abstrak", 319:"abstrak",
-  321:"abstrak", 322:"abstrak", 323:"abstrak",
-  324:"abstrak", 325:"abstrak", 326:"abstrak",
-  327:"abstrak", 328:"abstrak", 329:"abstrak",
-  337:"abstrak", 338:"abstrak", 339:"abstrak",
-  340:"abstrak", 341:"abstrak",
-  342:"abstrak", 343:"abstrak", 344:"abstrak",
-  345:"abstrak", 346:"abstrak", 347:"abstrak",
-  348:"abstrak", 349:"abstrak",
-  352:"abstrak", 353:"abstrak", 354:"abstrak", 355:"abstrak", 356:"abstrak",
-  357:"abstrak", 358:"abstrak",
-  359:"abstrak", 360:"abstrak", 362:"abstrak",
-  380:"abstrak", 381:"abstrak", 382:"abstrak", 383:"abstrak",
-  390:"abstrak", 391:"abstrak", 392:"abstrak",
-  393:"abstrak", 394:"abstrak",
-  397:"abstrak", 399:"abstrak", 400:"abstrak",
-  410:"abstrak", 411:"abstrak", 412:"abstrak",
-  422:"abstrak", 423:"abstrak",
-  424:"abstrak", 425:"abstrak", 426:"abstrak", 427:"abstrak",
-  445:"abstrak", 446:"abstrak", 447:"abstrak",
-  450:"abstrak",
-  453:"abstrak", 454:"abstrak", 455:"abstrak", 457:"abstrak", 460:"abstrak",
-  472:"abstrak", 473:"abstrak",
-  480:"abstrak", 481:"abstrak",
-  494:"abstrak", 495:"abstrak", 496:"abstrak",
-  499:"abstrak", 500:"abstrak", 501:"abstrak", 502:"abstrak",
-  507:"abstrak", 508:"abstrak",
-  511:"abstrak", 512:"abstrak",
-  516:"abstrak", 517:"abstrak",
-  531:"abstrak", 532:"abstrak",
-  533:"abstrak", 534:"abstrak", 535:"abstrak",
-  544:"abstrak", 545:"abstrak", 546:"abstrak",
-  550:"abstrak", 551:"abstrak", 552:"abstrak", 553:"abstrak",
-  558:"abstrak", 559:"abstrak",
-  583:"abstrak", 584:"abstrak", 585:"abstrak",
-  594:"abstrak", 595:"abstrak",
-  596:"abstrak", 597:"abstrak",
-  608:"abstrak", 609:"abstrak",
-  612:"abstrak", 613:"abstrak",
-  617:"abstrak", 618:"abstrak", 619:"abstrak", 620:"abstrak",
-  623:"abstrak", 624:"abstrak",
-  634:"abstrak", 635:"abstrak",
-  636:"abstrak", 637:"abstrak",
-  640:"abstrak",
-  673:"abstrak", 674:"abstrak", 675:"abstrak", 677:"abstrak",
-  678:"abstrak", 679:"abstrak", 680:"abstrak",
-
-  // Extra - items that bridge categories
-  217:"kerja", 361:"abstrak", 376:"cuaca",
-  466:"aktivitas", 467:"aktivitas",
-  10:"aktivitas",
-  238:"abstrak", 240:"abstrak",
-  436:"aktivitas", 437:"aktivitas", 438:"aktivitas"
+  305:"abstrak", 306:"abstrak", 316:"abstrak", 317:"abstrak", 318:"abstrak",
+  319:"abstrak", 320:"abstrak", 321:"abstrak", 322:"abstrak", 323:"abstrak",
+  324:"abstrak", 325:"abstrak", 326:"abstrak", 327:"abstrak", 328:"abstrak",
+  329:"abstrak", 337:"abstrak", 338:"abstrak", 339:"abstrak", 340:"abstrak",
+  341:"abstrak", 342:"abstrak", 343:"abstrak", 344:"abstrak", 345:"abstrak",
+  346:"abstrak", 347:"abstrak", 348:"abstrak", 349:"abstrak", 352:"abstrak",
+  353:"abstrak", 354:"abstrak", 355:"abstrak", 356:"abstrak", 357:"abstrak",
+  358:"abstrak", 359:"abstrak", 360:"abstrak", 361:"abstrak", 362:"abstrak",
+  380:"abstrak", 381:"abstrak", 382:"abstrak", 383:"abstrak", 390:"abstrak",
+  391:"abstrak", 392:"abstrak", 393:"abstrak", 394:"abstrak", 397:"abstrak",
+  398:"abstrak", 399:"abstrak", 400:"abstrak", 410:"abstrak", 411:"abstrak",
+  412:"abstrak", 413:"abstrak", 414:"abstrak", 422:"abstrak", 423:"abstrak",
+  424:"abstrak", 425:"abstrak", 426:"abstrak", 427:"abstrak", 445:"abstrak",
+  446:"abstrak", 447:"abstrak", 453:"abstrak", 454:"abstrak", 455:"abstrak",
+  456:"abstrak", 457:"abstrak", 458:"abstrak", 459:"abstrak", 460:"abstrak",
+  472:"abstrak", 473:"abstrak", 480:"abstrak", 481:"abstrak", 494:"abstrak",
+  495:"abstrak", 496:"abstrak", 499:"abstrak", 500:"abstrak", 501:"abstrak",
+  502:"abstrak", 507:"abstrak", 508:"abstrak", 511:"abstrak", 512:"abstrak",
+  516:"abstrak", 517:"abstrak", 531:"abstrak", 532:"abstrak", 533:"abstrak",
+  534:"abstrak", 535:"abstrak", 536:"abstrak", 544:"abstrak", 545:"abstrak",
+  546:"abstrak", 551:"abstrak", 552:"abstrak", 553:"abstrak", 558:"abstrak",
+  559:"abstrak", 583:"abstrak", 584:"abstrak", 585:"abstrak", 594:"abstrak",
+  595:"abstrak", 596:"abstrak", 597:"abstrak", 608:"abstrak", 609:"abstrak",
+  612:"abstrak", 613:"abstrak", 617:"abstrak", 618:"abstrak", 619:"abstrak",
+  620:"abstrak", 623:"abstrak", 624:"abstrak", 634:"abstrak", 635:"abstrak",
+  636:"abstrak", 637:"abstrak", 640:"abstrak", 641:"abstrak", 673:"abstrak",
+  674:"abstrak", 675:"abstrak", 676:"abstrak", 677:"abstrak", 678:"abstrak",
+  679:"abstrak", 680:"abstrak"
 };
+
 
 
 
@@ -345,8 +257,7 @@ const THEMATIC_MAP = {
 // fukushi = 副詞 (Kata Keterangan)
 const WORD_TYPE_MAP = {
   // ─── 動詞 (Kata Kerja) ───
-  // Berakhiran ~る, ~く, ~す, ~む, ~ぶ, ~う, ~つ, ~ぬ, dll
-  3:"doushi",    // 登山 (mendaki - aktivitas verbal)
+  3:"doushi",    // 登山 (mendaki)
   5:"doushi",    // 川遊び (bermain)
   10:"doushi",   // 水泳 (berenang)
   98:"doushi",   // 会う (bertemu)
@@ -385,13 +296,12 @@ const WORD_TYPE_MAP = {
   294:"doushi",  // 送る (kirim)
   305:"doushi",  // 使う (gunakan)
   306:"doushi",  // 使う (gunakan)
-
   338:"doushi",  // 注意する (memperhatikan)
   339:"doushi",  // 注文する (memesan)
   342:"doushi",  // 終わる (selesai)
   343:"doushi",  // 終わり (selesai)
   344:"doushi",  // 終わる (selesai)
-  350:"doushi",  // 到着 (datang - する verb)
+  350:"doushi",  // 到着 (datang)
   351:"doushi",  // 到着 (datang)
   353:"doushi",  // 変わる (berubah)
   354:"doushi",  // 変える (mengubah)
@@ -400,6 +310,7 @@ const WORD_TYPE_MAP = {
   361:"doushi",  // 安心する (lega)
   381:"doushi",  // 着く (tiba)
   382:"doushi",  // 着る (memakai)
+
   385:"doushi",  // 散歩する (jalan-jalan)
   386:"doushi",  // 進む (maju)
   387:"doushi",  // 進む (maju)
@@ -438,7 +349,6 @@ const WORD_TYPE_MAP = {
   583:"doushi",  // 始める (mulai)
   584:"doushi",  // 始める (memulai)
   585:"doushi",  // 始まる (mulai)
-
   587:"doushi",  // 動かす (menggerakkan)
   595:"doushi",  // 利用する (gunakan)
   596:"doushi",  // 押す (tekan)
@@ -453,6 +363,7 @@ const WORD_TYPE_MAP = {
   624:"doushi",  // 浴びる (mandi)
   631:"doushi",  // 冷える (dingin)
   632:"doushi",  // 冷やす (dinginkan)
+
   634:"doushi",  // 泣く (menangis)
   635:"doushi",  // 泣く (menangis)
   641:"doushi",  // 質問する (bertanya)
@@ -469,6 +380,7 @@ const WORD_TYPE_MAP = {
   680:"doushi",  // 起こる (terjadi)
   682:"doushi",  // 借りる (meminjam)
   97:"doushi",   // 生産する (produksi)
+  672:"doushi",  // 受験する (mengikuti ujian)
 
   // ─── い形容詞 (Kata Sifat-i) ───
   75:"i_keiyoushi",   // 大きい (besar)
@@ -526,6 +438,7 @@ const WORD_TYPE_MAP = {
   495:"fukushi",   // 急に (tiba-tiba)
   546:"fukushi",   // 特に (terutama)
 
+
   // ─── 名詞 (Kata Benda) ─── Sisanya yang tidak masuk di atas
   1:"meishi",    // 山 (gunung)
   2:"meishi",    // 富士山
@@ -568,7 +481,6 @@ const WORD_TYPE_MAP = {
   42:"meishi",   // 百
   43:"meishi",   // 千
   44:"meishi",   // 万
-
   45:"meishi",   // 口
   46:"meishi",   // 入口
   47:"meishi",   // 目
@@ -577,6 +489,7 @@ const WORD_TYPE_MAP = {
   50:"meishi",   // 手
   51:"meishi",   // お手洗い
   52:"meishi",   // 手紙
+
   53:"meishi",   // 足
   54:"meishi",   // 足首
   55:"meishi",   // 力
@@ -585,6 +498,7 @@ const WORD_TYPE_MAP = {
   58:"meishi",   // 上
   59:"meishi",   // 以上
   60:"meishi",   // 下
+  61:"meishi",   // 下手
   62:"meishi",   // 以下
   63:"meishi",   // 左
   64:"meishi",   // 左手
@@ -619,7 +533,6 @@ const WORD_TYPE_MAP = {
   103:"meishi",  // 見学
   104:"meishi",  // 見本
   105:"meishi",  // 意見
-
   109:"meishi",  // 来月
   110:"meishi",  // 来年
   111:"meishi",  // 来週
@@ -627,6 +540,7 @@ const WORD_TYPE_MAP = {
   113:"meishi",  // 米
   114:"meishi",  // 米国
   116:"meishi",  // 飲酒
+
   117:"meishi",  // 飲料水
   119:"meishi",  // 食事
   120:"meishi",  // 食堂
@@ -670,7 +584,6 @@ const WORD_TYPE_MAP = {
   168:"meishi",  // 西洋
   169:"meishi",  // 南
   170:"meishi",  // 南口
-
   171:"meishi",  // 北
   172:"meishi",  // 北口
   173:"meishi",  // 前
@@ -678,6 +591,7 @@ const WORD_TYPE_MAP = {
   175:"meishi",  // 外
   176:"meishi",  // 外国
   177:"meishi",  // 外国語
+
   178:"meishi",  // 歌
   180:"meishi",  // 歌手
   181:"meishi",  // 青
@@ -720,14 +634,15 @@ const WORD_TYPE_MAP = {
   222:"meishi",  // 冬
   223:"meishi",  // 空
   224:"meishi",  // 空気
+  225:"meishi",  // 空腹
   226:"meishi",  // 空港
-
   227:"meishi",  // 風
   228:"meishi",  // 秋風
   229:"meishi",  // 台風
   230:"meishi",  // 風呂
   231:"meishi",  // 風邪
   232:"meishi",  // 朝
+
   233:"meishi",  // 朝ごはん
   234:"meishi",  // 昼
   235:"meishi",  // 昼休み
@@ -772,13 +687,13 @@ const WORD_TYPE_MAP = {
   288:"meishi",  // 知
   291:"meishi",  // 知り合い
   292:"meishi",  // 知識
-
   295:"meishi",  // 部
   296:"meishi",  // 部長
   297:"meishi",  // 部屋
   298:"meishi",  // 近
   300:"meishi",  // 近く
   301:"meishi",  // 近所
+
   302:"meishi",  // 試
   303:"meishi",  // 試験
   304:"meishi",  // 試合
@@ -823,13 +738,13 @@ const WORD_TYPE_MAP = {
   366:"meishi",  // 毎
   367:"meishi",  // 毎月
   368:"meishi",  // 毎日
-
   369:"meishi",  // 毎晩
   370:"meishi",  // 毎年
   371:"meishi",  // 毎週
   372:"meishi",  // 日
   373:"meishi",  // 日曜日
   374:"meishi",  // 日本人
+
   375:"meishi",  // 日本語
   376:"meishi",  // 日光
   377:"meishi",  // 少
@@ -877,10 +792,10 @@ const WORD_TYPE_MAP = {
   446:"meishi",  // 用事
   447:"meishi",  // 用意
   448:"meishi",  // 重
-
   451:"meishi",  // 早
   453:"meishi",  // 自
   454:"meishi",  // 自分
+
   455:"meishi",  // 自ら
   456:"meishi",  // 自転車
   457:"meishi",  // 自由
@@ -931,9 +846,9 @@ const WORD_TYPE_MAP = {
   515:"meishi",  // 家事
   516:"meishi",  // 説
   517:"meishi",  // 説明
+
   518:"meishi",  // 音
   519:"meishi",  // 音楽
-
   520:"meishi",  // 医
   521:"meishi",  // 医者
   522:"meishi",  // 医学
@@ -982,6 +897,7 @@ const WORD_TYPE_MAP = {
   578:"meishi",  // 地図
   579:"meishi",  // 地震
   580:"meishi",  // 楽
+
   586:"meishi",  // 動
   588:"meishi",  // 動物
   589:"meishi",  // 男
@@ -990,7 +906,6 @@ const WORD_TYPE_MAP = {
   592:"meishi",  // 男の人
   593:"meishi",  // 男子学生
   594:"meishi",  // 利
-
   598:"meishi",  // 言
   599:"meishi",  // 言語
   600:"meishi",  // 季
@@ -1033,6 +948,7 @@ const WORD_TYPE_MAP = {
   659:"meishi",  // 帰国
   660:"meishi",  // 遠
   662:"meishi",  // 遠く
+
   663:"meishi",  // 料
   664:"meishi",  // 料理
   665:"meishi",  // 料金
@@ -1045,13 +961,7 @@ const WORD_TYPE_MAP = {
   676:"meishi",  // 開店
   677:"meishi",  // 開始
   681:"meishi",  // 借
-  683:"meishi",  // 借家
-
-  // Entries with special forms
-  61:"meishi",   // 下手 (not adjective per se, noun-like)
-  225:"meishi",  // 空腹
-  336:"meishi",  // Handled above as i_keiyoushi override
-  672:"doushi"   // 受験する (mengikuti ujian)
+  683:"meishi"   // 借家
 };
 
 
