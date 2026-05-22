@@ -53,6 +53,7 @@
     align-items: baseline;
     gap: 10px;
   }
+
   .logo-kanji {
     font-family: var(--font-jp);
     font-size: 22px;
@@ -76,6 +77,34 @@
     color: var(--text2);
     font-weight: 500;
   }
+
+  /* ── Tab Navigation ── */
+  .tab-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .tab-btn {
+    padding: 14px 28px;
+    border: none;
+    background: transparent;
+    color: var(--text3);
+    font-size: 13px;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+    letter-spacing: 0.02em;
+  }
+  .tab-btn:hover { color: var(--text2); background: var(--surface2); }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 500;
+  }
+
 
   /* ── Screens ── */
   .screen { display: none; flex: 1; }
@@ -131,6 +160,7 @@
     transition: border-color 0.2s;
   }
   .num-input:focus { border-color: var(--accent2); }
+
 
   /* ── Shared button base ── */
   .btn {
@@ -193,6 +223,7 @@
   .mode-btn:hover { border-color: var(--border2); color: var(--text); }
   .mode-btn.on { border-color: var(--accent); color: var(--accent); background: rgba(232,201,122,0.08); }
 
+
   .sel-footer {
     display: flex;
     align-items: center;
@@ -206,6 +237,174 @@
     margin-left: auto;
   }
   .sel-count strong { color: var(--accent); }
+
+  /* ── Daftar Kanji Screen ── */
+  #screen-list {
+    max-width: 860px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 32px 32px;
+    gap: 20px;
+    overflow-y: auto;
+  }
+  .list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .list-header h2 {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text);
+  }
+  .list-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .list-search {
+    width: 220px;
+    padding: 8px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 13px;
+    font-family: var(--font-sans);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .list-search:focus { border-color: var(--accent2); }
+  .list-search::placeholder { color: var(--text3); }
+
+
+  /* ── Accordion Items ── */
+  .kanji-list { display: flex; flex-direction: column; gap: 6px; }
+  .kanji-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .kanji-group:hover { border-color: var(--border2); }
+  .kanji-group.open { border-color: var(--border2); }
+
+  .kanji-parent {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+  }
+  .kanji-parent:hover { background: var(--surface2); }
+
+  .kanji-parent-arrow {
+    font-size: 10px;
+    color: var(--text3);
+    transition: transform 0.25s;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .kanji-group.open .kanji-parent-arrow { transform: rotate(90deg); }
+
+  .kanji-parent-char {
+    font-family: var(--font-jp);
+    font-size: 28px;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 36px;
+    text-align: center;
+  }
+  .kanji-parent-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+  }
+  .kanji-parent-kana {
+    font-size: 13px;
+    color: var(--text2);
+    font-weight: 300;
+  }
+  .kanji-parent-meaning {
+    font-size: 12px;
+    color: var(--text3);
+  }
+  .kanji-parent-badge {
+    font-size: 11px;
+    color: var(--text3);
+    background: var(--surface2);
+    padding: 3px 8px;
+    border-radius: 100px;
+    flex-shrink: 0;
+  }
+  .kanji-parent-no {
+    font-size: 11px;
+    color: var(--text3);
+    flex-shrink: 0;
+  }
+
+
+  .kanji-children {
+    display: none;
+    border-top: 1px solid var(--border);
+    background: rgba(0,0,0,0.15);
+  }
+  .kanji-group.open .kanji-children { display: block; }
+
+  .kanji-child {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px 10px 50px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+  }
+  .kanji-child:last-child { border-bottom: none; }
+  .kanji-child:hover { background: rgba(255,255,255,0.02); }
+
+  .kanji-child-tree {
+    color: var(--text3);
+    font-size: 12px;
+    width: 14px;
+    flex-shrink: 0;
+  }
+  .kanji-child-char {
+    font-family: var(--font-jp);
+    font-size: 20px;
+    color: var(--text);
+    min-width: 60px;
+  }
+  .kanji-child-kana {
+    font-size: 12px;
+    color: var(--text2);
+    min-width: 100px;
+  }
+  .kanji-child-meaning {
+    font-size: 12px;
+    color: var(--text3);
+    flex: 1;
+  }
+  .kanji-child-no {
+    font-size: 10px;
+    color: var(--text3);
+    flex-shrink: 0;
+  }
+
+  .list-stats {
+    font-size: 12px;
+    color: var(--text3);
+    padding: 4px 0;
+  }
+  .list-stats span { color: var(--accent); font-weight: 500; }
+
+
 </style>
 </head>
 <body>
@@ -219,6 +418,12 @@
     <div class="header-stat" aria-live="polite">Total: <span id="header-total">0</span> kanji</div>
   </div>
 </header>
+
+<!-- TAB NAVIGATION -->
+<nav class="tab-nav">
+  <button class="tab-btn active" id="tab-flashcard" aria-label="Tab Flashcard">Flashcard</button>
+  <button class="tab-btn" id="tab-list" aria-label="Tab Daftar Kanji">Daftar Kanji</button>
+</nav>
 
 <!-- SELECT SCREEN -->
 <div id="screen-select" class="screen active" role="region" aria-label="Pengaturan kuis">
@@ -235,6 +440,7 @@
       </div>
     </div>
   </div>
+
 
   <div>
     <p class="section-title">Pilih cepat per kelompok</p>
@@ -275,9 +481,9 @@
 
 </div>
 
+
 <!-- QUIZ SCREEN -->
 <div id="screen-quiz" class="screen" role="region" aria-label="Kuis flashcard">
-
 
   <div class="quiz-header">
     <button class="btn btn-sm" id="btn-back-quiz" aria-label="Kembali ke pengaturan">← Kembali</button>
@@ -313,6 +519,7 @@
     <button class="btn-rate btn-know" id="btn-rate-know" aria-label="Tahu">✓ Tahu</button>
   </div>
 
+
   <div class="keyboard-hints" aria-hidden="true">
     <span class="kh"><kbd class="kbd">Space</kbd> balik kartu</span>
     <span class="kh"><kbd class="kbd">←</kbd> sebelumnya</span>
@@ -345,6 +552,21 @@
     <button class="btn" id="btn-retry-all" aria-label="Ulangi semua kartu">Ulangi semua</button>
     <button class="btn" id="btn-back-result" aria-label="Pilih kanji lain">Pilih kanji lain</button>
   </div>
+</div>
+
+
+<!-- DAFTAR KANJI SCREEN -->
+<div id="screen-list" class="screen" role="region" aria-label="Daftar Kanji">
+  <div class="list-header">
+    <h2>Daftar Kanji</h2>
+    <div class="list-actions">
+      <input type="text" class="list-search" id="list-search" placeholder="Cari kanji, kana, arti..." aria-label="Cari kanji">
+      <button class="btn btn-sm" id="btn-expand-all">Buka Semua</button>
+      <button class="btn btn-sm" id="btn-collapse-all">Tutup Semua</button>
+    </div>
+  </div>
+  <div class="list-stats" id="list-stats"></div>
+  <div class="kanji-list" id="kanji-list"></div>
 </div>
 
 
@@ -412,6 +634,7 @@
   .card:hover { border-color: var(--border2); transform: translateY(-1px); }
   .card:active { transform: translateY(0); }
   .card:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+
 
   .card-badge {
     position: absolute;
@@ -489,6 +712,7 @@
     transition: opacity 0.2s;
   }
 
+
   /* Rating */
   .rating-row {
     display: flex;
@@ -552,6 +776,7 @@
   .stat-know .stat-num { color: var(--green); }
   .stat-unknown .stat-num { color: var(--red); }
   .stat-left .stat-num { color: var(--text2); }
+
 
   /* keyboard hint */
   .keyboard-hints {
@@ -617,6 +842,7 @@
   .res-red .res-num { color: var(--red); }
   .result-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 
+
   /* ── Shuffle Toggle ── */
   .shuffle-toggle {
     display: flex;
@@ -679,6 +905,7 @@
   .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
   .btn-nav:disabled:hover { background: transparent; color: var(--text2); }
 
+
   /* scrollbar */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
@@ -689,10 +916,17 @@
     header { padding: 14px 18px; }
     #screen-select { padding: 24px 16px; }
     #screen-quiz { padding: 24px 16px; }
+    #screen-list { padding: 20px 16px; }
     .card-main { font-size: 52px; }
     .header-stats { display: none; }
+    .list-header { flex-direction: column; align-items: flex-start; }
+    .list-search { width: 100%; }
+    .list-actions { width: 100%; flex-wrap: wrap; }
+    .kanji-child { padding-left: 36px; }
+    .tab-btn { padding: 12px 18px; font-size: 12px; }
   }
 </style>
+
 
 
 <script src="kanji-data.js"></script>
@@ -707,7 +941,7 @@
 
   // ── State ──
   let selectedIds = new Set();
-  let quizMode = 'k2a'; // 'k2a' | 'a2k' | 'mix'
+  let quizMode = 'k2a';
   let deck = [];
   let currentIndex = 0;
   let isFlipped = false;
@@ -716,6 +950,7 @@
   let unknownCards = [];
   let isShuffleOn = false;
   let currentCardMode = 'k2a';
+  let currentTab = 'flashcard';
 
   // ── DOM Cache ──
   const dom = {
@@ -746,7 +981,11 @@
     btnShuffleRestart: document.getElementById('btn-shuffle-restart'),
     shuffleToggle: document.getElementById('shuffle-toggle'),
     flashcard: document.getElementById('flashcard'),
+    kanjiList: document.getElementById('kanji-list'),
+    listStats: document.getElementById('list-stats'),
+    listSearch: document.getElementById('list-search'),
   };
+
 
   // ── Utility Functions ──
   function generateCategories(total, size) {
@@ -778,26 +1017,175 @@
     document.getElementById('screen-' + screenId).classList.add('active');
   }
 
+  // ── Tab Navigation ──
+  function switchTab(tab) {
+    currentTab = tab;
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+      btn.classList.remove('active');
+    });
+    if (tab === 'flashcard') {
+      document.getElementById('tab-flashcard').classList.add('active');
+      showScreen('select');
+    } else {
+      document.getElementById('tab-list').classList.add('active');
+      showScreen('list');
+      renderKanjiList();
+    }
+  }
+
+
+  // ── Kanji List / Hierarchy Logic ──
+  function buildKanjiHierarchy() {
+    // Strategy: iterate through KANJI_DATA in order.
+    // A "parent" kanji is one where the kanji field is a single character
+    // (or has a special marker like "?" in kana meaning it's a root).
+    // Children are the entries that follow until the next parent.
+    // We group sequentially: a parent is followed by its derivatives.
+    
+    const groups = [];
+    let currentGroup = null;
+
+    for (let i = 0; i < KANJI_DATA.length; i++) {
+      const entry = KANJI_DATA[i];
+      const kanji = entry[1];
+      
+      // Determine if this is a parent (single kanji character)
+      // A parent has exactly 1 character in the kanji field
+      const isSingleKanji = kanji.length === 1;
+      
+      if (isSingleKanji) {
+        // Start a new group
+        if (currentGroup) {
+          groups.push(currentGroup);
+        }
+        currentGroup = {
+          parent: entry,
+          children: []
+        };
+      } else {
+        // It's a derivative/compound
+        if (currentGroup) {
+          currentGroup.children.push(entry);
+        } else {
+          // Orphan compound (no parent yet), make it its own group
+          groups.push({ parent: entry, children: [] });
+        }
+      }
+    }
+    // Push the last group
+    if (currentGroup) {
+      groups.push(currentGroup);
+    }
+    return groups;
+  }
+
+  function renderKanjiList(searchQuery) {
+    const groups = buildKanjiHierarchy();
+    const query = (searchQuery || '').toLowerCase().trim();
+    
+    let html = '';
+    let parentCount = 0;
+    let childCount = 0;
+    let visibleGroups = 0;
+
+    groups.forEach(function(group, index) {
+      const parent = group.parent;
+      const children = group.children;
+      
+      // Search filter
+      if (query) {
+        const parentMatch = matchesSearch(parent, query);
+        const matchingChildren = children.filter(function(c) { return matchesSearch(c, query); });
+        if (!parentMatch && matchingChildren.length === 0) return;
+      }
+
+      visibleGroups++;
+      parentCount++;
+      const hasChildren = children.length > 0;
+
+
+      html += '<div class="kanji-group" data-index="' + index + '">';
+      html += '<div class="kanji-parent" onclick="toggleGroup(this)">';
+      
+      if (hasChildren) {
+        html += '<span class="kanji-parent-arrow">&#9654;</span>';
+      } else {
+        html += '<span class="kanji-parent-arrow" style="opacity:0">&#9654;</span>';
+      }
+      
+      html += '<span class="kanji-parent-char">' + parent[1] + '</span>';
+      html += '<div class="kanji-parent-info">';
+      html += '<span class="kanji-parent-kana">' + parent[2] + '</span>';
+      html += '<span class="kanji-parent-meaning">' + parent[3] + '</span>';
+      html += '</div>';
+      
+      if (hasChildren) {
+        html += '<span class="kanji-parent-badge">' + children.length + ' turunan</span>';
+      }
+      html += '<span class="kanji-parent-no">#' + parent[0] + '</span>';
+      html += '</div>';
+
+      if (hasChildren) {
+        html += '<div class="kanji-children">';
+        children.forEach(function(child, ci) {
+          childCount++;
+          var isLast = ci === children.length - 1;
+          var treeChar = isLast ? '└' : '├';
+          html += '<div class="kanji-child">';
+          html += '<span class="kanji-child-tree">' + treeChar + '</span>';
+          html += '<span class="kanji-child-char">' + child[1] + '</span>';
+          html += '<span class="kanji-child-kana">' + child[2] + '</span>';
+          html += '<span class="kanji-child-meaning">' + child[3] + '</span>';
+          html += '<span class="kanji-child-no">#' + child[0] + '</span>';
+          html += '</div>';
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+    });
+
+    dom.kanjiList.innerHTML = html;
+    dom.listStats.innerHTML = 'Menampilkan <span>' + visibleGroups + '</span> kanji tunggal dengan <span>' + childCount + '</span> kanji turunan';
+  }
+
+  function matchesSearch(entry, query) {
+    return entry[1].toLowerCase().indexOf(query) !== -1 ||
+           entry[2].toLowerCase().indexOf(query) !== -1 ||
+           entry[3].toLowerCase().indexOf(query) !== -1;
+  }
+
+
+  // Global function for accordion toggle
+  window.toggleGroup = function(parentEl) {
+    var group = parentEl.closest('.kanji-group');
+    group.classList.toggle('open');
+  };
+
+  function expandAllGroups() {
+    document.querySelectorAll('.kanji-group').forEach(function(g) {
+      g.classList.add('open');
+    });
+  }
+
+  function collapseAllGroups() {
+    document.querySelectorAll('.kanji-group').forEach(function(g) {
+      g.classList.remove('open');
+    });
+  }
+
   // ── Selection Logic ──
   function applyRange() {
     var fromValue = parseInt(dom.rangeFrom.value) || 1;
     var toValue = parseInt(dom.rangeTo.value) || TOTAL_KANJI;
-
-    // Validation: clamp values to valid range
     fromValue = clamp(fromValue, 1, TOTAL_KANJI);
     toValue = clamp(toValue, 1, TOTAL_KANJI);
-
-    // Swap if from > to
     if (fromValue > toValue) {
       var temp = fromValue;
       fromValue = toValue;
       toValue = temp;
     }
-
-    // Update input fields with validated values
     dom.rangeFrom.value = fromValue;
     dom.rangeTo.value = toValue;
-
     selectedIds.clear();
     KANJI_DATA.forEach(function(entry) {
       if (entry[0] >= fromValue && entry[0] <= toValue) {
@@ -815,7 +1203,6 @@
     var allSelected = entriesInCategory.every(function(entry) {
       return selectedIds.has(entry[0]);
     });
-
     entriesInCategory.forEach(function(entry) {
       if (allSelected) {
         selectedIds.delete(entry[0]);
@@ -873,6 +1260,7 @@
     dom.btnShuffleRestart.style.display = isShuffleOn ? 'inline-block' : 'none';
   }
 
+
   // ── Quiz Logic ──
   function startQuiz() {
     if (selectedIds.size === 0) {
@@ -921,10 +1309,8 @@
     isFlipped = false;
     var currentEntry = deck[currentIndex];
     currentCardMode = quizMode === 'mix' ? (currentIndex % 2 === 0 ? 'k2a' : 'a2k') : quizMode;
-
     dom.cardBadge.textContent = currentCardMode === 'k2a' ? 'Kanji → Arti' : 'Arti → Kanji';
     dom.cardNo.textContent = '#' + currentEntry[0];
-
     if (currentCardMode === 'k2a') {
       dom.cardMain.textContent = currentEntry[1];
       dom.cardMain.className = 'card-main';
@@ -934,7 +1320,6 @@
       dom.cardMain.className = 'card-main latin';
       dom.cardSub.textContent = currentEntry[2];
     }
-
     dom.cardAnswer.className = 'card-answer';
     dom.flipHint.style.display = 'block';
     dom.ratingRow.classList.remove('visible');
@@ -942,11 +1327,11 @@
     updateNavigationButtons();
   }
 
+
   function flipCard() {
     if (isFlipped) return;
     isFlipped = true;
     var currentEntry = deck[currentIndex];
-
     if (currentCardMode === 'k2a') {
       dom.answerContent.innerHTML =
         '<div class="answer-main">' + currentEntry[3] + '</div>' +
@@ -956,7 +1341,6 @@
         '<div class="answer-kanji">' + currentEntry[1] + '</div>' +
         '<div class="answer-kana">' + currentEntry[2] + '</div>';
     }
-
     dom.cardAnswer.className = 'card-answer visible';
     dom.flipHint.style.display = 'none';
     dom.ratingRow.classList.add('visible');
@@ -995,6 +1379,7 @@
     showScreen('result');
   }
 
+
   function retryUnknown() {
     if (unknownCards.length === 0) {
       alert('Semua sudah tahu!');
@@ -1023,13 +1408,11 @@
     showScreen('select');
   }
 
-
   // ── Keyboard Handler ──
   function handleKeyDown(event) {
     var quizScreen = document.getElementById('screen-quiz');
     if (!quizScreen.classList.contains('active')) return;
     if (event.target.tagName === 'INPUT') return;
-
     switch (event.code) {
       case 'Space':
         event.preventDefault();
@@ -1044,16 +1427,15 @@
         nextCard();
         break;
     }
-
     if (isFlipped) {
       if (event.key === '1') rateCard(false);
       if (event.key === '2') rateCard(true);
     }
   }
 
+
   // ── Initialization ──
   function initialize() {
-    // Set dynamic max values based on actual data
     dom.rangeFrom.max = TOTAL_KANJI;
     dom.rangeTo.max = TOTAL_KANJI;
     dom.headerTotal.textContent = TOTAL_KANJI;
@@ -1076,6 +1458,10 @@
     applyRange();
 
     // ── Event Listeners ──
+
+    // Tab navigation
+    document.getElementById('tab-flashcard').addEventListener('click', function() { switchTab('flashcard'); });
+    document.getElementById('tab-list').addEventListener('click', function() { switchTab('list'); });
 
     // Select screen
     document.getElementById('btn-apply-range').addEventListener('click', applyRange);
@@ -1102,6 +1488,20 @@
     document.getElementById('btn-retry-unknown').addEventListener('click', retryUnknown);
     document.getElementById('btn-retry-all').addEventListener('click', retryAll);
     document.getElementById('btn-back-result').addEventListener('click', backToSelect);
+
+    // Kanji list screen
+    document.getElementById('btn-expand-all').addEventListener('click', expandAllGroups);
+    document.getElementById('btn-collapse-all').addEventListener('click', collapseAllGroups);
+    
+    // Search with debounce
+    var searchTimeout;
+    dom.listSearch.addEventListener('input', function() {
+      clearTimeout(searchTimeout);
+      var val = dom.listSearch.value;
+      searchTimeout = setTimeout(function() {
+        renderKanjiList(val);
+      }, 200);
+    });
 
     // Keyboard
     document.addEventListener('keydown', handleKeyDown);
