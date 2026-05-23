@@ -58,12 +58,12 @@ const KANJI_DATA = [
 [12,"水道","すいどう","Saluran air"],
 [10,"水泳","すいえい","Berenang"],
 
-// --- Tumbuhan (Kecil→Besar): 花→木(→林→森) ---
+// --- Tumbuhan (Kecil→Besar): 花→木 ---
 // 花 (Bunga)
 [650,"花","はな - か","Bunga"],
 [651,"花見","はなみ","Melihat bunga"],
 [653,"花屋","はなや","Toko bunga"],
-// 木 (Pohon) — 林, 森, 森林 adalah turunan dari 木
+// 木 (Pohon)
 [13,"木","き - もく","Pohon"],
 [143,"林","はやし","Hutan kecil"],
 [144,"森","もり","Hutan lebat"],
