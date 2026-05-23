@@ -77,18 +77,20 @@ const THEMATIC_MAP = {
   556:"angka", 557:"angka",
 
 
-  // Tubuh & Kesehatan (口, 目, 耳, 手, 足, 首, 指, 背, 腹, 体, 頭, 顔, 病, 痛, 薬, 医)
-  45:"tubuh", 46:"tubuh", 47:"tubuh", 48:"tubuh", 49:"tubuh",
+  // Tubuh & Kesehatan (口, 目, 耳, 手, 足, 首, 指, 背, 腹, 体, 頭, 顔, 病, 痛, 薬, 医, 風邪, 空腹, 風呂)
+  45:"tubuh", 47:"tubuh", 48:"tubuh", 49:"tubuh",
   50:"tubuh", 51:"tubuh", 52:"tubuh", 53:"tubuh", 54:"tubuh",
   55:"tubuh", 146:"tubuh", 147:"tubuh", 148:"tubuh", 149:"tubuh",
   188:"tubuh", 189:"tubuh", 194:"tubuh", 195:"tubuh",
   205:"tubuh", 206:"tubuh", 207:"tubuh", 208:"tubuh",
+  225:"tubuh",
+  230:"tubuh",
+  231:"tubuh",
   241:"tubuh", 242:"tubuh", 243:"tubuh", 244:"tubuh", 245:"tubuh",
   313:"tubuh", 314:"tubuh", 315:"tubuh",
   440:"tubuh", 441:"tubuh", 442:"tubuh",
   520:"tubuh", 521:"tubuh", 522:"tubuh",
   614:"tubuh", 615:"tubuh", 616:"tubuh",
-  231:"tubuh",
 
   // Waktu & Kalender (月, 日, 年, 朝, 昼, 夜, 今, 毎, 時, 午, 晩, 曜日)
   8:"waktu", 11:"waktu", 14:"waktu", 18:"waktu", 23:"waktu",
@@ -118,18 +120,18 @@ const THEMATIC_MAP = {
   541:"arah", 542:"arah", 543:"arah",
   660:"arah", 661:"arah", 662:"arah",
 
-  // Orang & Keluarga (人, 私, 兄, 弟, 姉, 妹, 妻, 男, 女, 若)
-  85:"orang", 86:"orang", 87:"orang",
+  // Orang & Keluarga (人, 私, 兄, 弟, 姉, 妹, 妻, 男, 女, 若, 大人, 長男, 赤ちゃん)
+  72:"orang", 85:"orang", 86:"orang", 87:"orang",
+  186:"orang",
   191:"orang", 192:"orang", 193:"orang",
   248:"orang", 249:"orang", 250:"orang", 251:"orang",
   309:"orang", 310:"orang", 311:"orang", 312:"orang",
   335:"orang",
   589:"orang", 590:"orang", 591:"orang", 592:"orang", 593:"orang",
-  72:"orang",
 
 
   // Makanan & Minuman (飲, 食, 飯, 茶, 米, 料理, 野菜)
-  113:"makanan", 114:"makanan",
+  113:"makanan",
   115:"makanan", 116:"makanan", 117:"makanan",
   118:"makanan", 119:"makanan", 120:"makanan",
   252:"makanan", 413:"makanan",
@@ -139,24 +141,34 @@ const THEMATIC_MAP = {
   639:"makanan",
   663:"makanan", 664:"makanan", 665:"makanan",
 
-  // Aktivitas & Gerakan (行, 来, 出, 入, 歩, 走, 乗, 降, 通, 帰, 返, 送, 運, 散歩, 動)
+  // Aktivitas & Gerakan (行, 来, 出, 入, 歩, 走, 乗, 降, 通, 帰, 返, 送, 運, 散歩, 動, 始, 終, 開, 閉, 起, 押, 訪, 待, 洗)
+  46:"aktivitas",
   106:"aktivitas", 107:"aktivitas",
   108:"aktivitas", 109:"aktivitas", 110:"aktivitas", 111:"aktivitas", 112:"aktivitas",
   270:"aktivitas", 271:"aktivitas",
   276:"aktivitas", 277:"aktivitas", 278:"aktivitas",
   279:"aktivitas", 280:"aktivitas", 281:"aktivitas", 282:"aktivitas",
   293:"aktivitas", 294:"aktivitas",
+  342:"aktivitas", 343:"aktivitas", 344:"aktivitas",
   350:"aktivitas", 351:"aktivitas",
   384:"aktivitas", 385:"aktivitas", 386:"aktivitas", 387:"aktivitas",
   388:"aktivitas", 389:"aktivitas",
   395:"aktivitas", 396:"aktivitas",
   419:"aktivitas", 420:"aktivitas", 421:"aktivitas",
+  422:"aktivitas", 423:"aktivitas",
   428:"aktivitas", 429:"aktivitas", 430:"aktivitas", 431:"aktivitas",
+  436:"aktivitas", 437:"aktivitas", 438:"aktivitas",
+  466:"aktivitas", 467:"aktivitas",
   565:"aktivitas", 566:"aktivitas", 567:"aktivitas",
+  583:"aktivitas", 584:"aktivitas", 585:"aktivitas",
   586:"aktivitas", 587:"aktivitas", 588:"aktivitas",
+  596:"aktivitas", 597:"aktivitas",
   602:"aktivitas", 603:"aktivitas", 604:"aktivitas",
   605:"aktivitas", 606:"aktivitas", 607:"aktivitas",
+  608:"aktivitas", 609:"aktivitas",
   657:"aktivitas", 658:"aktivitas", 659:"aktivitas",
+  673:"aktivitas", 674:"aktivitas", 675:"aktivitas", 677:"aktivitas",
+  678:"aktivitas", 679:"aktivitas", 680:"aktivitas",
 
 
   // Pendidikan & Bahasa (学, 教, 勉, 試, 校, 字, 文, 問, 読, 書, 話, 句, 単語, 言, 英)
@@ -202,7 +214,6 @@ const THEMATIC_MAP = {
   568:"tempat", 569:"tempat", 570:"tempat", 571:"tempat",
   572:"tempat", 573:"tempat", 574:"tempat",
   226:"tempat",
-  439:"tempat", 676:"tempat",
   681:"tempat", 682:"tempat", 683:"tempat",
 
   // Sifat & Keadaan (大, 小, 高, 低, 長, 多, 少, 古, 新, 広, 軽, 重, 早)
@@ -224,31 +235,31 @@ const THEMATIC_MAP = {
   // Cuaca & Musim (天, 風, 雪, 曇, 寒, 暑, 暖, 温, 冷, 春, 夏, 冬, 季, 空)
   202:"cuaca", 203:"cuaca", 204:"cuaca",
   219:"cuaca", 220:"cuaca", 221:"cuaca", 222:"cuaca",
-  223:"cuaca", 224:"cuaca", 225:"cuaca",
-  227:"cuaca", 228:"cuaca", 229:"cuaca", 230:"cuaca",
+  223:"cuaca", 224:"cuaca",
+  227:"cuaca", 228:"cuaca", 229:"cuaca",
   266:"cuaca", 267:"cuaca",
   461:"cuaca", 462:"cuaca", 463:"cuaca",
   474:"cuaca", 475:"cuaca", 476:"cuaca", 477:"cuaca",
   523:"cuaca", 524:"cuaca", 525:"cuaca",
-  549:"cuaca",
   600:"cuaca", 601:"cuaca",
   629:"cuaca", 630:"cuaca", 631:"cuaca", 632:"cuaca", 633:"cuaca",
   647:"cuaca", 648:"cuaca", 649:"cuaca",
 
   // Warna (青, 赤, 銀, 色, 紅)
   181:"warna", 182:"warna", 183:"warna",
-  184:"warna", 185:"warna", 186:"warna", 187:"warna",
+  184:"warna", 185:"warna", 187:"warna",
   216:"warna", 218:"warna",
   263:"warna",
   638:"warna",
 
-  // Pekerjaan & Ekonomi (金, 働, 会社, 仕事, 職, 工, 農, 産, 売, 借)
+  // Pekerjaan & Ekonomi (金, 働, 会社, 仕事, 職, 工, 農, 産, 売, 作, 開店, 閉店)
   15:"kerja", 16:"kerja", 17:"kerja", 19:"kerja",
-  95:"kerja", 96:"kerja", 97:"kerja",
+  97:"kerja",
   98:"kerja", 99:"kerja", 100:"kerja", 101:"kerja",
   264:"kerja", 265:"kerja",
   295:"kerja", 296:"kerja",
   332:"kerja", 333:"kerja",
+  439:"kerja",
   464:"kerja", 465:"kerja",
   468:"kerja", 469:"kerja",
   478:"kerja", 479:"kerja",
@@ -256,6 +267,7 @@ const THEMATIC_MAP = {
   537:"kerja", 538:"kerja", 539:"kerja", 540:"kerja",
   654:"kerja", 655:"kerja", 656:"kerja",
   668:"kerja", 669:"kerja", 670:"kerja",
+  676:"kerja",
 
 
   // Hiburan & Media (映, 歌, 音, 写真, 放送, 楽)
@@ -269,10 +281,11 @@ const THEMATIC_MAP = {
   254:"hiburan", 414:"hiburan",
 
   // Kata Abstrak & Umum
-  10:"abstrak", 21:"abstrak",
+  21:"abstrak",
   77:"abstrak", 79:"abstrak", 80:"abstrak", 81:"abstrak",
-  90:"abstrak", 91:"abstrak", 92:"abstrak",
+  90:"abstrak", 91:"abstrak", 92:"abstrak", 95:"abstrak", 96:"abstrak",
   102:"abstrak", 103:"abstrak", 104:"abstrak", 105:"abstrak",
+  114:"abstrak",
   138:"abstrak", 139:"abstrak", 140:"abstrak", 141:"abstrak", 142:"abstrak",
   159:"abstrak", 160:"abstrak", 161:"abstrak",
   174:"abstrak", 253:"abstrak",
@@ -286,7 +299,6 @@ const THEMATIC_MAP = {
   327:"abstrak", 328:"abstrak", 329:"abstrak",
   337:"abstrak", 338:"abstrak", 339:"abstrak",
   340:"abstrak", 341:"abstrak",
-  342:"abstrak", 343:"abstrak", 344:"abstrak",
   345:"abstrak", 346:"abstrak", 347:"abstrak",
   348:"abstrak", 349:"abstrak",
   352:"abstrak", 353:"abstrak", 354:"abstrak", 355:"abstrak", 356:"abstrak",
@@ -297,7 +309,6 @@ const THEMATIC_MAP = {
   393:"abstrak", 394:"abstrak",
   397:"abstrak", 399:"abstrak", 400:"abstrak",
   410:"abstrak", 411:"abstrak", 412:"abstrak",
-  422:"abstrak", 423:"abstrak",
   424:"abstrak", 425:"abstrak", 426:"abstrak", 427:"abstrak",
   445:"abstrak", 446:"abstrak", 447:"abstrak",
   450:"abstrak",
@@ -312,27 +323,20 @@ const THEMATIC_MAP = {
   531:"abstrak", 532:"abstrak",
   533:"abstrak", 534:"abstrak", 535:"abstrak",
   544:"abstrak", 545:"abstrak", 546:"abstrak",
-  550:"abstrak", 551:"abstrak", 552:"abstrak", 553:"abstrak",
+  549:"abstrak", 550:"abstrak", 551:"abstrak", 552:"abstrak", 553:"abstrak",
   558:"abstrak", 559:"abstrak",
-  583:"abstrak", 584:"abstrak", 585:"abstrak",
   594:"abstrak", 595:"abstrak",
-  596:"abstrak", 597:"abstrak",
-  608:"abstrak", 609:"abstrak",
   612:"abstrak", 613:"abstrak",
   617:"abstrak", 618:"abstrak", 619:"abstrak", 620:"abstrak",
   623:"abstrak", 624:"abstrak",
   634:"abstrak", 635:"abstrak",
   636:"abstrak", 637:"abstrak",
   640:"abstrak",
-  673:"abstrak", 674:"abstrak", 675:"abstrak", 677:"abstrak",
-  678:"abstrak", 679:"abstrak", 680:"abstrak",
 
   // Extra - items that bridge categories
-  217:"kerja", 361:"abstrak", 376:"cuaca",
-  466:"aktivitas", 467:"aktivitas",
   10:"aktivitas",
-  238:"abstrak", 240:"abstrak",
-  436:"aktivitas", 437:"aktivitas", 438:"aktivitas"
+  217:"kerja", 361:"abstrak", 376:"cuaca",
+  238:"abstrak", 240:"abstrak"
 };
 
 
@@ -848,7 +852,7 @@ const WORD_TYPE_MAP = {
   403:"meishi",  // 問い合わせ
   404:"meishi",  // 発
   405:"meishi",  // 発売
-  406:"meishi",  // 発明する
+  406:"doushi",  // 発明する (menemukan - する verb)
   407:"meishi",  // 発音
   408:"meishi",  // 勉
   409:"meishi",  // 勉強
@@ -871,7 +875,7 @@ const WORD_TYPE_MAP = {
   439:"meishi",  // 閉店
   440:"meishi",  // 腹
   441:"meishi",  // お腹
-  442:"meishi",  // 腹が立つ
+  442:"doushi",  // 腹が立つ (marah - expression/verb)
   443:"meishi",  // 軽
   445:"meishi",  // 用
   446:"meishi",  // 用事
@@ -1048,8 +1052,9 @@ const WORD_TYPE_MAP = {
   683:"meishi",  // 借家
 
   // Entries with special forms
-  61:"meishi",   // 下手 (not adjective per se, noun-like)
+  61:"na_keiyoushi",   // 下手 (へた - na-adjective meaning "not skilled")
   225:"meishi",  // 空腹
+  319:"na_keiyoushi",  // 明らか (na-adjective meaning "obvious")
   336:"meishi",  // Handled above as i_keiyoushi override
   672:"doushi"   // 受験する (mengikuti ujian)
 };
