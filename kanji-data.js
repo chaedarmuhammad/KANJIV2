@@ -58,16 +58,16 @@ const KANJI_DATA = [
 [12,"水道","すいどう","Saluran air"],
 [10,"水泳","すいえい","Berenang"],
 
-// --- Tumbuhan (Kecil→Besar): 花→木 ---
-// 花 (Bunga)
-[650,"花","はな - か","Bunga"],
-[651,"花見","はなみ","Melihat bunga"],
-[653,"花屋","はなや","Toko bunga"],
+// --- Tumbuhan (Besar→Kecil): 木→林→森→花 ---
 // 木 (Pohon)
 [13,"木","き - もく","Pohon"],
 [143,"林","はやし","Hutan kecil"],
 [144,"森","もり","Hutan lebat"],
 [145,"森林","しんりん","Hutan (formal)"],
+// 花 (Bunga)
+[650,"花","はな - か","Bunga"],
+[651,"花見","はなみ","Melihat bunga"],
+[653,"花屋","はなや","Toko bunga"],
 
 // --- Langit & Cuaca (Atas→Bawah secara visual): 天→空→風→雲→雪 ---
 // 天 (Langit/Surga)
@@ -112,6 +112,8 @@ const KANJI_DATA = [
 // 夏 (Panas)
 [220,"夏","なつ - か","Musim panas"],
 [221,"夏休み","なつやすみ","Libur musim panas"],
+// 秋 (Gugur)
+[725,"秋","あき - しゅう","Musim gugur"],
 // 冬 (Dingin)
 [222,"冬","ふゆ - とう","Musim dingin"],
 
@@ -694,7 +696,7 @@ const KANJI_DATA = [
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 12. AKTIVITAS & GERAKAN
+// 12. AKTIVITAS & PERPINDAHAN
 //     Logika: Pasangan lawan arti + Alur proses perjalanan
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -762,7 +764,7 @@ const KANJI_DATA = [
 [277,"降りる","おりる","Turun (dari kendaraan)"],
 [278,"降る","ふる","Turun (hujan/salju)"],
 
-// --- Alur Proses Perjalanan: 起→出→行→通→到→帰 ---
+// --- Alur Proses Perjalanan: 起→歩→散→走→通→到→帰 ---
 // 起 (Bangun)
 [678,"起","お - き","Bangun/Terjadi"],
 [679,"起きる","おきる","Bangun tidur"],
@@ -789,7 +791,13 @@ const KANJI_DATA = [
 [658,"帰る","かえる","Pulang (v)"],
 [659,"帰国","きこく","Pulang ke negara asal"],
 
-// --- Gerakan Tangan/Badan ---
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 13. GERAKAN TANGAN & BADAN
+//     Logika: Pasangan lawan (押↔引) + Alur proses (持→運→送→届→返)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// --- Alur: 持→運→送→届→返 (Pegang→Angkut→Kirim→Sampai→Kembali) ---
 // 持 (Pegang/Bawa)
 [388,"持","も - じ","Memegang/Membawa"],
 [389,"持つ","もつ","Memegang (v)"],
@@ -810,10 +818,8 @@ const KANJI_DATA = [
 [565,"返","かえ - へん","Mengembalikan"],
 [566,"返事","へんじ","Balasan"],
 [567,"返す","かえす","Mengembalikan (v)"],
-// 動 (Gerakan)
-[586,"動","うご - どう","Bergerak"],
-[587,"動かす","うごかす","Menggerakkan"],
-[588,"動物","どうぶつ","Hewan"],
+
+// --- Pasangan Lawan: 押↔引 (Tekan↔Tarik) ---
 // 押 (Tekan)
 [596,"押","お - おう","Menekan/Mendorong"],
 [597,"押す","おす","Menekan (v)"],
@@ -823,6 +829,12 @@ const KANJI_DATA = [
 [722,"引き出し","ひきだし","Laci"],
 [723,"引っ越す","ひっこす","Pindah rumah"],
 [724,"引っ越し","ひっこし","Pindahan"],
+
+// --- Gerakan Lain ---
+// 動 (Gerakan)
+[586,"動","うご - どう","Bergerak"],
+[587,"動かす","うごかす","Menggerakkan"],
+[588,"動物","どうぶつ","Hewan"],
 // 洗 (Cuci)
 [466,"洗","あら - せん","Mencuci"],
 [467,"洗う","あらう","Mencuci (v)"],
@@ -832,7 +844,7 @@ const KANJI_DATA = [
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 13. PENDIDIKAN
+// 14. PENDIDIKAN
 //     Logika: Alur proses (Belajar→Diajar→Ujian→Lulus)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -877,7 +889,7 @@ const KANJI_DATA = [
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 14. BAHASA & KOMUNIKASI
+// 15. BAHASA & KOMUNIKASI
 //     Logika: Pasangan lawan (読↔書, 聞↔話, 問↔答)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -939,7 +951,7 @@ const KANJI_DATA = [
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 15. TRANSPORTASI & PERJALANAN
+// 16. TRANSPORTASI & PERJALANAN
 //     Logika: Umum→Spesifik (Jalan→Kendaraan→Tempat transit)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -983,7 +995,7 @@ const KANJI_DATA = [
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 16. TEMPAT & BANGUNAN
+// 17. TEMPAT & BANGUNAN
 //     Logika: Besar→Kecil (Negara→Kota→Desa→Toko→Rumah→Kamar)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1035,7 +1047,7 @@ const KANJI_DATA = [
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 17. WARNA
+// 18. WARNA
 //     Logika: Spektrum warna (Merah→Biru→Perak→Umum)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1058,7 +1070,7 @@ const KANJI_DATA = [
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 18. PEKERJAAN & EKONOMI
+// 19. PEKERJAAN & EKONOMI
 //     Logika: Pasangan lawan (売↔買) + Alur (Kerja→Perusahaan→Uang)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1123,7 +1135,7 @@ const KANJI_DATA = [
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 19. HIBURAN & MEDIA
+// 20. HIBURAN & MEDIA
 //     Logika: Umum→Spesifik (Musik→Film→Siaran→Hobi)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1157,7 +1169,7 @@ const KANJI_DATA = [
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 20. PIKIRAN & PERASAAN
+// 21. PIKIRAN & PERASAAN
 //     Logika: Pasangan lawan (好↔嫌) + Umum→Spesifik
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1191,7 +1203,7 @@ const KANJI_DATA = [
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 21. MELIHAT & PERSEPSI
+// 22. MELIHAT & PERSEPSI
 //     Logika: Umum→Spesifik
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1205,7 +1217,7 @@ const KANJI_DATA = [
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 22. TINDAKAN & KEPERLUAN
+// 23. TINDAKAN & KEPERLUAN
 //     Logika: Pasangan lawan (待↔急, 集↔別, 禁↔自由)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1248,7 +1260,7 @@ const KANJI_DATA = [
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 23. INFORMASI & PENJELASAN
+// 24. INFORMASI & PENJELASAN
 //     Logika: Umum→Spesifik
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1278,7 +1290,7 @@ const KANJI_DATA = [
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 24. KEHIDUPAN SEHARI-HARI
+// 25. KEHIDUPAN SEHARI-HARI
 //     Logika: Alur harian (Istirahat→Pakaian→Mandi→Tidur)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
