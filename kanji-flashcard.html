@@ -449,37 +449,7 @@
     </div>
   </div>
 
-  <div>
-    <p class="section-title">Kategori tematik (topik)</p>
-    <div class="panel">
-      <div class="chips" id="theme-chips" role="group" aria-label="Kategori tematik"></div>
-      <div style="margin-top:10px;display:flex;gap:8px">
-        <button class="btn btn-sm" id="btn-theme-all" aria-label="Pilih semua tema">Semua Tema</button>
-        <button class="btn btn-sm" id="btn-theme-clear" aria-label="Hapus semua tema">Hapus Tema</button>
-      </div>
-    </div>
-  </div>
 
-  <div>
-    <p class="section-title">Jenis kata (tata bahasa)</p>
-    <div class="panel">
-      <div class="chips" id="wordtype-chips" role="group" aria-label="Jenis kata"></div>
-      <div style="margin-top:10px;display:flex;gap:8px">
-        <button class="btn btn-sm" id="btn-wt-all" aria-label="Pilih semua jenis kata">Semua Jenis</button>
-        <button class="btn btn-sm" id="btn-wt-clear" aria-label="Hapus semua jenis kata">Hapus Jenis</button>
-      </div>
-    </div>
-  </div>
-
-  <div>
-    <p class="section-title">Filter kategori</p>
-    <div class="panel">
-      <div class="sel-footer" style="padding-top:0">
-        <button class="btn btn-accent" id="btn-apply-category" aria-label="Terapkan filter kategori">Terapkan Kategori</button>
-        <span class="sel-count" id="cat-filter-count" aria-live="polite">Hasil: <strong>0</strong> kanji</span>
-      </div>
-    </div>
-  </div>
 
   <div>
     <p class="section-title">Mode kuis</p>
@@ -962,7 +932,6 @@
 
 
 <script src="kanji-data.js"></script>
-<script src="kanji-categories.js"></script>
 <script>
 (function() {
   'use strict';
@@ -984,8 +953,6 @@
   let isShuffleOn = false;
   let currentCardMode = 'k2a';
   let currentTab = 'flashcard';
-  let selectedThemes = new Set();
-  let selectedWordTypes = new Set();
 
   // ── DOM Cache ──
   const dom = {
@@ -1019,9 +986,6 @@
     kanjiList: document.getElementById('kanji-list'),
     listStats: document.getElementById('list-stats'),
     listSearch: document.getElementById('list-search'),
-    themeChips: document.getElementById('theme-chips'),
-    wordtypeChips: document.getElementById('wordtype-chips'),
-    catFilterCount: document.getElementById('cat-filter-count'),
   };
 
 
@@ -1472,94 +1436,6 @@
   }
 
 
-  // ── Dual Tag Filter Logic ──
-  function toggleTheme(themeKey) {
-    if (selectedThemes.has(themeKey)) {
-      selectedThemes.delete(themeKey);
-    } else {
-      selectedThemes.add(themeKey);
-    }
-    updateThemeChips();
-    updateCategoryFilterCount();
-  }
-
-  function toggleWordType(wtKey) {
-    if (selectedWordTypes.has(wtKey)) {
-      selectedWordTypes.delete(wtKey);
-    } else {
-      selectedWordTypes.add(wtKey);
-    }
-    updateWordTypeChips();
-    updateCategoryFilterCount();
-  }
-
-  function updateThemeChips() {
-    var chips = dom.themeChips.querySelectorAll('.chip');
-    var keys = Object.keys(THEMATIC_CATEGORIES);
-    keys.forEach(function(key, index) {
-      chips[index].classList.toggle('on', selectedThemes.has(key));
-      chips[index].setAttribute('aria-pressed', selectedThemes.has(key));
-    });
-  }
-
-  function updateWordTypeChips() {
-    var chips = dom.wordtypeChips.querySelectorAll('.chip');
-    var keys = Object.keys(WORD_TYPE_CATEGORIES);
-    keys.forEach(function(key, index) {
-      chips[index].classList.toggle('on', selectedWordTypes.has(key));
-      chips[index].setAttribute('aria-pressed', selectedWordTypes.has(key));
-    });
-  }
-
-  function updateCategoryFilterCount() {
-    var themes = Array.from(selectedThemes);
-    var wordTypes = Array.from(selectedWordTypes);
-    var matchingIds = filterByDualTag(themes, wordTypes);
-    dom.catFilterCount.innerHTML = 'Hasil: <strong>' + matchingIds.length + '</strong> kanji';
-  }
-
-  function applyCategoryFilter() {
-    var themes = Array.from(selectedThemes);
-    var wordTypes = Array.from(selectedWordTypes);
-    var matchingIds = filterByDualTag(themes, wordTypes);
-    if (matchingIds.length === 0) {
-      alert('Tidak ada kanji yang cocok dengan filter ini. Coba pilih kategori lain.');
-      return;
-    }
-    selectedIds.clear();
-    matchingIds.forEach(function(id) { selectedIds.add(id); });
-    updateCategoryChips();
-    updateSelectedCount();
-  }
-
-  function selectAllThemes() {
-    Object.keys(THEMATIC_CATEGORIES).forEach(function(key) {
-      selectedThemes.add(key);
-    });
-    updateThemeChips();
-    updateCategoryFilterCount();
-  }
-
-  function clearAllThemes() {
-    selectedThemes.clear();
-    updateThemeChips();
-    updateCategoryFilterCount();
-  }
-
-  function selectAllWordTypes() {
-    Object.keys(WORD_TYPE_CATEGORIES).forEach(function(key) {
-      selectedWordTypes.add(key);
-    });
-    updateWordTypeChips();
-    updateCategoryFilterCount();
-  }
-
-  function clearAllWordTypes() {
-    selectedWordTypes.clear();
-    updateWordTypeChips();
-    updateCategoryFilterCount();
-  }
-
   // ── Initialization ──
   function initialize() {
     dom.rangeFrom.max = TOTAL_KANJI;
@@ -1583,39 +1459,6 @@
     // Apply initial range
     applyRange();
 
-    // Generate thematic category chips
-    Object.keys(THEMATIC_CATEGORIES).forEach(function(key) {
-      var cat = THEMATIC_CATEGORIES[key];
-      var chipButton = document.createElement('button');
-      chipButton.className = 'chip';
-      chipButton.textContent = cat.icon + ' ' + cat.label;
-      chipButton.setAttribute('role', 'button');
-      chipButton.setAttribute('aria-pressed', 'false');
-      chipButton.setAttribute('aria-label', 'Kategori ' + cat.label);
-      chipButton.addEventListener('click', function() {
-        toggleTheme(key);
-      });
-      dom.themeChips.appendChild(chipButton);
-    });
-
-    // Generate word type chips
-    Object.keys(WORD_TYPE_CATEGORIES).forEach(function(key) {
-      var cat = WORD_TYPE_CATEGORIES[key];
-      var chipButton = document.createElement('button');
-      chipButton.className = 'chip';
-      chipButton.textContent = cat.icon + ' ' + cat.label;
-      chipButton.setAttribute('role', 'button');
-      chipButton.setAttribute('aria-pressed', 'false');
-      chipButton.setAttribute('aria-label', 'Jenis kata ' + cat.label);
-      chipButton.addEventListener('click', function() {
-        toggleWordType(key);
-      });
-      dom.wordtypeChips.appendChild(chipButton);
-    });
-
-    // Update initial category filter count
-    updateCategoryFilterCount();
-
     // ── Event Listeners ──
 
     // Tab navigation
@@ -1628,13 +1471,6 @@
     document.getElementById('btn-clear-all').addEventListener('click', clearAll);
     document.getElementById('btn-start-quiz').addEventListener('click', startQuiz);
     dom.shuffleToggle.addEventListener('click', toggleShuffle);
-
-    // Category filter buttons
-    document.getElementById('btn-apply-category').addEventListener('click', applyCategoryFilter);
-    document.getElementById('btn-theme-all').addEventListener('click', selectAllThemes);
-    document.getElementById('btn-theme-clear').addEventListener('click', clearAllThemes);
-    document.getElementById('btn-wt-all').addEventListener('click', selectAllWordTypes);
-    document.getElementById('btn-wt-clear').addEventListener('click', clearAllWordTypes);
 
     // Mode buttons
     document.getElementById('mode-k2a').addEventListener('click', function() { setQuizMode('k2a'); });
