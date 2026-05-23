@@ -19,7 +19,7 @@ const KANJI_DATA = [
 //    Logika: Besar→Kecil per kelompok (Daratan, Perairan, Elemen, Tumbuhan)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-// --- Daratan (Besar→Kecil): 山→地→田→土 ---
+// --- Daratan (Besar→Kecil): 山→地→田→野→土 ---
 // 山 (Gunung)
 [1,"山","やま - さん","Gunung"],
 [2,"富士山","ふじさん","Gunung Fuji"],
@@ -34,10 +34,13 @@ const KANJI_DATA = [
 // 田 (Sawah)
 [283,"田","た - でん","Sawah"],
 [284,"田舎","いなか","Pedesaan"],
+// 野 (Padang/Liar)
+[412,"野","の - や","Padang/Liar"],
 // 土 (Tanah)
 [20,"土","つち - ど","Tanah"],
 [22,"土地","とち","Lahan"],
 [21,"お土産","おみやげ","Oleh-oleh"],
+
 
 // --- Perairan (Besar→Kecil): 海→川→池 ---
 // 海 (Laut)
@@ -58,16 +61,19 @@ const KANJI_DATA = [
 [12,"水道","すいどう","Saluran air"],
 [10,"水泳","すいえい","Berenang"],
 
-// --- Tumbuhan (Besar→Kecil): 木→林→森→花 ---
-// 木 (Pohon)
-[13,"木","き - もく","Pohon"],
-[143,"林","はやし","Hutan kecil"],
+// --- Tumbuhan (Besar→Kecil): 森→林→木→花 ---
+// 森 (Hutan lebat)
 [144,"森","もり","Hutan lebat"],
 [145,"森林","しんりん","Hutan (formal)"],
+// 林 (Hutan kecil)
+[143,"林","はやし","Hutan kecil"],
+// 木 (Pohon)
+[13,"木","き - もく","Pohon"],
 // 花 (Bunga)
 [650,"花","はな - か","Bunga"],
 [651,"花見","はなみ","Melihat bunga"],
 [653,"花屋","はなや","Toko bunga"],
+
 
 // --- Langit & Cuaca (Atas→Bawah secara visual): 天→空→風→雲→雪 ---
 // 天 (Langit/Surga)
@@ -95,8 +101,6 @@ const KANJI_DATA = [
 [269,"太平洋","たいへいよう","Samudra Pasifik"],
 [79,"大西洋","たいせいよう","Samudra Atlantik"],
 
-// --- 野 (Ladang) — dari cat.25 ---
-[412,"野","の - や","Padang/Liar"],
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 2. MUSIM & SUHU
@@ -139,6 +143,7 @@ const KANJI_DATA = [
 [631,"冷える","ひえる","Menjadi dingin"],
 [632,"冷やす","ひやす","Mendinginkan"],
 [633,"冷蔵庫","れいぞうこ","Kulkas"],
+
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 3. ANGKA & HITUNGAN
@@ -187,6 +192,7 @@ const KANJI_DATA = [
 // 番 (Nomor/Giliran)
 [556,"番","- ばん","Nomor/Giliran"],
 [557,"番号","ばんごう","Nomor urut"],
+
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 4. WAKTU & KALENDER
@@ -249,6 +255,7 @@ const KANJI_DATA = [
 [498,"晩ご飯","ばんごはん","Makan malam"],
 [369,"毎晩","まいばん","Setiap malam"],
 
+
 // --- Relatif Waktu ---
 // 今 (Sekarang)
 [196,"今","いま - こん","Sekarang"],
@@ -271,6 +278,7 @@ const KANJI_DATA = [
 // 過 (Lewat/Masa lalu)
 [348,"過","す - か","Lewat/Berlebihan"],
 [349,"過去","かこ","Masa lalu"],
+
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -317,6 +325,7 @@ const KANJI_DATA = [
 [171,"北","きた - ほく","Utara"],
 [172,"北口","きたぐち","Pintu utara"],
 
+
 // --- Relatif Posisi: 前↔後, 外↔内, 近↔遠 ---
 // 前 (Depan) ↔ 後 (Belakang)
 [173,"前","まえ - ぜん","Depan/Sebelum"],
@@ -338,10 +347,15 @@ const KANJI_DATA = [
 [661,"遠い","とおい","Jauh (adj)"],
 [662,"遠く","とおく","Di kejauhan"],
 
-// --- 間 (Antara) — dari cat.25 ---
+// --- 間 (Antara) ---
 [159,"間","あいだ - かん","Antara/Jarak"],
 [160,"間に合う","まにあう","Tepat waktu"],
 [161,"間違い","まちがい","Kesalahan"],
+
+// --- 方 (Arah/Cara) ---
+[238,"方","かた - ほう","Cara/Arah"],
+[240,"方法","ほうほう","Metode"],
+
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -366,6 +380,9 @@ const KANJI_DATA = [
 [83,"小さい","ちいさい","Kecil (adj)"],
 [84,"小学生","しょうがくせい","Murid SD"],
 
+// --- 太 (Gemuk/Tebal) ---
+[268,"太","ふと - たい","Gemuk/Tebal"],
+
 // --- 高↔低 (Tinggi↔Rendah) ---
 // 高 (Tinggi)
 [526,"高","たか - こう","Tinggi/Mahal"],
@@ -386,6 +403,7 @@ const KANJI_DATA = [
 [689,"短い","みじかい","Pendek (adj)"],
 [690,"短所","たんしょ","Kekurangan"],
 [691,"短期","たんき","Jangka pendek"],
+
 
 // --- 広↔狭 (Luas↔Sempit) ---
 // 広 (Luas)
@@ -434,17 +452,15 @@ const KANJI_DATA = [
 [697,"遅れる","おくれる","Terlambat"],
 [698,"遅刻する","ちこくする","Terlambat (formal)"],
 
-// --- 太 (Gemuk/Tebal) ---
-[268,"太","ふと - たい","Gemuk/Tebal"],
-
-// --- 最 (Paling) — dari cat.25 ---
+// --- Derajat & Batas ---
+// 最 (Paling)
 [321,"最","もっと - さい","Paling"],
 [322,"最後","さいご","Terakhir"],
 [323,"最良","さいりょう","Terbaik"],
-
-// --- 限 (Batas) — dari cat.25 ---
+// 限 (Batas)
 [480,"限","かぎ - げん","Batas"],
 [481,"限界","げんかい","Batas kemampuan"],
+
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -461,6 +477,8 @@ const KANJI_DATA = [
 [709,"暗","くら - あん","Gelap"],
 [710,"暗い","くらい","Gelap (adj)"],
 [711,"暗記する","あんきする","Menghafal"],
+
+// --- 良↔悪 (Baik↔Buruk) ---
 // 悪 (Buruk)
 [345,"悪","わる - あく","Buruk/Jahat"],
 [346,"悪い","わるい","Buruk (adj)"],
@@ -489,26 +507,27 @@ const KANJI_DATA = [
 [391,"不安な","ふあんな","Cemas (adj)"],
 [392,"不便な","ふべんな","Tidak praktis (adj)"],
 
+// --- 便 (Praktis) ---
+[507,"便","たよ - べん","Praktis/Surat"],
+[508,"便利な","べんりな","Praktis (adj)"],
+
 // --- 光 (Cahaya) ---
 [357,"光","ひかり - こう","Cahaya"],
 [358,"光る","ひかる","Bersinar"],
 
-// --- 特 (Khusus) — dari cat.25 ---
+// --- 特 (Khusus) ---
 [544,"特","- とく","Khusus/Istimewa"],
 [545,"特別な","とくべつな","Spesial"],
 [546,"特に","とくに","Terutama"],
 
-// --- 同 (Sama) — dari cat.25 ---
-[531,"同","おな - どう","Sama"],
-[532,"同じ","おなじ","Sama (adj)"],
-
-// --- 様 (Keadaan/Tuan) — dari cat.25 ---
+// --- 様 (Keadaan/Tuan) ---
 [558,"様","さま - よう","Tuan/Keadaan"],
 [559,"様子","ようす","Keadaan/Situasi"],
 
-// --- 便 (Praktis) — dari cat.25 ---
-[507,"便","たよ - べん","Praktis/Surat"],
-[508,"便利な","べんりな","Praktis (adj)"],
+// --- 有 (Ada/Memiliki) ---
+[327,"有","あ - ゆう","Ada/Memiliki"],
+[328,"有名な","ゆうめいな","Terkenal (adj)"],
+
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -558,6 +577,7 @@ const KANJI_DATA = [
 [55,"力","ちから - りょく","Kekuatan"],
 
 
+
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 9. KESEHATAN
 //    Logika: Alur proses (Sakit→Dokter→Obat→Sembuh)
@@ -585,7 +605,7 @@ const KANJI_DATA = [
 [272,"元","もと - げん","Asal/Dasar"],
 [273,"元気な","げんきな","Sehat (adj)"],
 [274,"元日","がんじつ","Hari tahun baru"],
-[275,"元気","げんき","Semangat/Sehat"],
+
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -621,6 +641,16 @@ const KANJI_DATA = [
 [700,"老人","ろうじん","Lansia"],
 [701,"老後","ろうご","Masa tua"],
 
+// --- Siklus Hidup: 生↔死 ---
+// 生 (Hidup)
+[95,"生","い - せい","Hidup/Lahir"],
+[96,"生活","せいかつ","Kehidupan"],
+[97,"生産する","せいさんする","Memproduksi"],
+// 死 (Mati)
+[410,"死","し - し","Kematian"],
+[411,"死ぬ","しぬ","Mati (v)"],
+
+
 // --- Keluarga (Pasangan: 兄↔弟, 姉↔妹) ---
 // 兄 (Kakak laki) ↔ 弟 (Adik laki)
 [249,"兄","あに - けい","Kakak laki-laki"],
@@ -635,8 +665,6 @@ const KANJI_DATA = [
 [702,"夫","おっと - ふ","Suami"],
 [703,"夫婦","ふうふ","Pasangan suami istri"],
 [704,"夫人","ふじん","Nyonya"],
-// 赤ちゃん (Bayi) — dipindah dari Warna ke sini
-[186,"赤ちゃん","あかちゃん","Bayi"],
 
 // --- Rumah & Keluarga ---
 // 家 (Rumah/Keluarga)
@@ -644,13 +672,9 @@ const KANJI_DATA = [
 [514,"家族","かぞく","Keluarga"],
 [515,"家事","かじ","Pekerjaan rumah tangga"],
 
-// --- 名 (Nama) — dari cat.25 ---
-[174,"名前","なまえ","Nama"],
+// --- Hubungan ---
+[619,"世話","せわ","Merawat/Mengurus"],
 
-// --- 有 (Ada/Terkenal) — dari cat.25 ---
-[327,"有","あ - ゆう","Ada/Memiliki"],
-[328,"有名な","ゆうめいな","Terkenal (adj)"],
-[329,"有名","ゆうめい","Terkenal"],
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -695,6 +719,7 @@ const KANJI_DATA = [
 [639,"紅茶","こうちゃ","Teh hitam"],
 
 
+
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 12. AKTIVITAS & PERPINDAHAN
 //     Logika: Pasangan lawan arti + Alur proses perjalanan
@@ -736,15 +761,6 @@ const KANJI_DATA = [
 [343,"終わり","おわり","Akhir (noun)"],
 [344,"終わる","おわる","Berakhir"],
 
-// --- Pasangan Lawan: 生↔死 (Hidup↔Mati) ---
-// 生 (Hidup)
-[95,"生","い - せい","Hidup/Lahir"],
-[96,"生活","せいかつ","Kehidupan"],
-[97,"生産する","せいさんする","Memproduksi"],
-// 死 (Mati)
-[410,"死","し - し","Kematian"],
-[411,"死ぬ","しぬ","Mati (v)"],
-
 // --- Pasangan Lawan: 進↔止 (Maju↔Berhenti) ---
 // 進 (Maju)
 [386,"進","すす - しん","Maju"],
@@ -753,6 +769,7 @@ const KANJI_DATA = [
 [602,"止","と - し","Berhenti"],
 [603,"止める","とめる","Menghentikan"],
 [604,"止む","やむ","Mereda"],
+
 
 // --- Pasangan Lawan: 乗↔降 (Naik↔Turun) ---
 // 乗 (Naik)
@@ -790,6 +807,7 @@ const KANJI_DATA = [
 [657,"帰","かえ - き","Pulang"],
 [658,"帰る","かえる","Pulang (v)"],
 [659,"帰国","きこく","Pulang ke negara asal"],
+
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -834,6 +852,7 @@ const KANJI_DATA = [
 // 動 (Gerakan)
 [586,"動","うご - どう","Bergerak"],
 [587,"動かす","うごかす","Menggerakkan"],
+// 動物 — tetap mengikuti induk 動 meskipun makna berbeda
 [588,"動物","どうぶつ","Hewan"],
 // 洗 (Cuci)
 [466,"洗","あら - せん","Mencuci"],
@@ -841,6 +860,7 @@ const KANJI_DATA = [
 // 訪 (Kunjungi)
 [608,"訪","おとず - ほう","Mengunjungi"],
 [609,"訪問する","ほうもんする","Berkunjung (formal)"],
+
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -883,9 +903,6 @@ const KANJI_DATA = [
 // 宿題 (PR)
 [506,"宿題","しゅくだい","Pekerjaan rumah (PR)"],
 
-// --- 経 (Pengalaman/Lewat) — dari cat.25 ---
-[393,"経","へ - けい","Melewati/Pengalaman"],
-[394,"経験","けいけん","Pengalaman"],
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -902,6 +919,11 @@ const KANJI_DATA = [
 [125,"書","か - しょ","Menulis/Tulisan"],
 [126,"図書館","としょかん","Perpustakaan"],
 [127,"辞書","じしょ","Kamus"],
+// 紙 (Kertas)
+[262,"紙","かみ - し","Kertas"],
+// 本 (Buku)
+[666,"本","もと - ほん","Buku/Asal"],
+[667,"本屋","ほんや","Toko buku"],
 
 // --- Pasangan: 聞↔話 (Mendengar↔Berbicara) ---
 // 聞 (Dengar)
@@ -922,10 +944,13 @@ const KANJI_DATA = [
 [434,"答","こた - とう","Jawaban"],
 [435,"答え","こたえ","Jawaban (noun)"],
 
+
 // --- Bahasa & Huruf (Umum→Spesifik) ---
 // 言 (Kata/Bicara)
 [598,"言","い - げん","Kata/Ucapan"],
 [599,"言語","げんご","Bahasa"],
+// 意味 (Arti)
+[253,"意味","いみ","Arti/Makna"],
 // 字 (Huruf)
 [150,"字","あざ - じ","Huruf/Karakter"],
 [151,"漢字","かんじ","Huruf kanji"],
@@ -942,12 +967,15 @@ const KANJI_DATA = [
 [471,"英語","えいご","Bahasa Inggris"],
 // 発 (Pelafalan/Terbit)
 [404,"発","- はつ","Terbit/Berangkat"],
-[405,"発売","はつばい","Penjualan"],
-[406,"発明する","はつめいする","Menemukan"],
 [407,"発音","はつおん","Pelafalan"],
-// 本 (Buku)
-[666,"本","もと - ほん","Buku/Asal"],
-[667,"本屋","ほんや","Toko buku"],
+
+// --- 名 (Nama) ---
+[174,"名前","なまえ","Nama"],
+
+// --- 信 (Kepercayaan/Sinyal) ---
+[340,"信","- しん","Kepercayaan"],
+[341,"信号","しんごう","Lampu lalu lintas"],
+
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -963,12 +991,8 @@ const KANJI_DATA = [
 [131,"駐車場","ちゅうしゃじょう","Tempat parkir"],
 // 自 (Diri sendiri — konteks kendaraan)
 [453,"自","みずか - じ","Diri sendiri"],
-[454,"自分","じぶん","Diri sendiri (noun)"],
-[455,"自ら","みずから","Sendiri (adv)"],
 [456,"自転車","じてんしゃ","Sepeda"],
-[457,"自由","じゆう","Kebebasan"],
 [458,"自動車","じどうしゃ","Mobil (formal)"],
-[460,"自信","じしん","Percaya diri"],
 [459,"自動販売機","じどうはんばいき","Mesin penjual otomatis"],
 // 電 (Listrik/Kereta)
 [568,"電","- でん","Listrik"],
@@ -989,15 +1013,20 @@ const KANJI_DATA = [
 [214,"旅館","りょかん","Penginapan Jepang"],
 [215,"旅費","りょひ","Biaya perjalanan"],
 
-// --- 信 (Percaya) — dari cat.25 ---
-[340,"信","- しん","Kepercayaan"],
-[341,"信号","しんごう","Lampu lalu lintas"],
+// --- Kecelakaan ---
+[473,"事故","じこ","Kecelakaan"],
+
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 17. TEMPAT & BANGUNAN
-//     Logika: Besar→Kecil (Negara→Kota→Desa→Toko→Rumah→Kamar)
+//     Logika: Besar→Kecil (Dunia→Negara→Kota→Desa→Toko→Rumah→Kamar)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// --- 世 (Dunia) ---
+[617,"世","よ - せ","Dunia/Generasi"],
+[618,"世界","せかい","Dunia"],
+[620,"世代","せだい","Generasi"],
 
 // 国 (Negara)
 [90,"国","くに - こく","Negara"],
@@ -1029,21 +1058,7 @@ const KANJI_DATA = [
 [257,"台所","だいどころ","Dapur"],
 // 部屋 (Kamar)
 [297,"部屋","へや","Kamar"],
-// 借 (Pinjam — konteks tempat tinggal)
-[681,"借","か - しゃく","Meminjam"],
-[682,"借りる","かりる","Meminjam (v)"],
-[683,"借家","しゃくや","Rumah sewaan"],
-// 貸 (Meminjamkan)
-[712,"貸","か - たい","Meminjamkan"],
-[713,"貸す","かす","Meminjamkan (v)"],
-[714,"貸し出し","かしだし","Peminjaman"],
-[715,"貸家","かしや","Rumah disewakan"],
 
-// --- 世 (Dunia) — dari cat.25 ---
-[617,"世","よ - せ","Dunia/Generasi"],
-[618,"世界","せかい","Dunia"],
-[619,"世話","せわ","Merawat/Mengurus"],
-[620,"世代","せだい","Generasi"],
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1055,6 +1070,7 @@ const KANJI_DATA = [
 [184,"赤","あか - せき","Merah"],
 [185,"赤い","あかい","Merah (adj)"],
 [187,"赤外線","せきがいせん","Sinar inframerah"],
+[186,"赤ちゃん","あかちゃん","Bayi"],
 // 紅 (Merah tua)
 [638,"紅","べに - こう","Merah tua/Crimson"],
 // 青 (Biru)
@@ -1067,6 +1083,7 @@ const KANJI_DATA = [
 [218,"銀色","ぎんいろ","Warna perak"],
 // 色 (Warna — konsep umum)
 [263,"色","いろ - しょく","Warna"],
+
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1090,6 +1107,8 @@ const KANJI_DATA = [
 [538,"作る","つくる","Membuat (v)"],
 [539,"作文","さくぶん","Karangan"],
 [540,"作業","さぎょう","Pekerjaan (tugas)"],
+// 発明する (Menemukan)
+[406,"発明する","はつめいする","Menemukan"],
 
 // --- Perusahaan (Besar→Kecil: 会社→部) ---
 // 会 (Bertemu/Perusahaan)
@@ -1115,16 +1134,20 @@ const KANJI_DATA = [
 [529,"産","う - さん","Melahirkan/Produksi"],
 [530,"産業","さんぎょう","Industri"],
 
+
 // --- Pasangan: 売↔買 (Jual↔Beli) ---
 // 売 (Jual)
 [654,"売","う - ばい","Menjual"],
 [655,"売る","うる","Menjual (v)"],
 [656,"売店","ばいてん","Kios"],
+[405,"発売","はつばい","Penjualan"],
 // 買 (Beli)
 [684,"買","か - ばい","Membeli"],
 [685,"買う","かう","Membeli (v)"],
 [686,"買い物","かいもの","Belanja (noun)"],
 [687,"買い物する","かいものする","Berbelanja"],
+// 注文する (Memesan)
+[339,"注文する","ちゅうもんする","Memesan"],
 
 // --- Uang ---
 // 金 (Uang)
@@ -1132,6 +1155,7 @@ const KANJI_DATA = [
 [16,"現金","げんきん","Uang tunai"],
 [17,"お金","おかね","Uang (sopan)"],
 [19,"お金持ち","おかねもち","Orang kaya"],
+
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1168,8 +1192,9 @@ const KANJI_DATA = [
 [414,"野球","やきゅう","Bisbol"],
 
 
+
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 21. PIKIRAN & PERASAAN
+// 21. PIKIRAN, PERASAAN & PERSEPSI
 //     Logika: Pasangan lawan (好↔嫌) + Umum→Spesifik
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1201,23 +1226,26 @@ const KANJI_DATA = [
 [634,"泣","な - きゅう","Menangis"],
 [635,"泣く","なく","Menangis (v)"],
 
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 22. MELIHAT & PERSEPSI
-//     Logika: Umum→Spesifik
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-// 見 (Melihat)
+// --- 見 (Melihat) ---
 [102,"見","み - けん","Melihat"],
 [103,"見学","けんがく","Kunjungan studi"],
 [104,"見本","みほん","Contoh/Sampel"],
 [105,"意見","いけん","Pendapat"],
-// 意味 (Arti)
-[253,"意味","いみ","Arti/Makna"],
+
+// --- 自 (Diri Sendiri) ---
+[454,"自分","じぶん","Diri sendiri (noun)"],
+[455,"自ら","みずから","Sendiri (adv)"],
+[457,"自由","じゆう","Kebebasan"],
+[460,"自信","じしん","Percaya diri"],
+
+// --- 経 (Pengalaman) ---
+[393,"経","へ - けい","Melewati/Pengalaman"],
+[394,"経験","けいけん","Pengalaman"],
+
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 23. TINDAKAN & KEPERLUAN
+// 22. TINDAKAN & KEPERLUAN
 //     Logika: Pasangan lawan (待↔急, 集↔別, 禁↔自由)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1241,6 +1269,10 @@ const KANJI_DATA = [
 [426,"別の","べつの","Yang lain"],
 [427,"別々に","べつべつに","Secara terpisah"],
 
+// --- Pasangan: 同↔別 (Sama↔Berbeda) ---
+[531,"同","おな - どう","Sama"],
+[532,"同じ","おなじ","Sama (adj)"],
+
 // --- Pasangan: 禁↔許 (Larang — pasangan belum ada) ---
 // 禁 (Larang)
 [511,"禁","- きん","Larangan"],
@@ -1258,9 +1290,24 @@ const KANJI_DATA = [
 [594,"利","- り","Keuntungan/Manfaat"],
 [595,"利用する","りようする","Memanfaatkan"],
 
+// --- Pasangan: 借↔貸 (Pinjam↔Pinjamkan) ---
+// 借 (Pinjam)
+[681,"借","か - しゃく","Meminjam"],
+[682,"借りる","かりる","Meminjam (v)"],
+[683,"借家","しゃくや","Rumah sewaan"],
+// 貸 (Meminjamkan)
+[712,"貸","か - たい","Meminjamkan"],
+[713,"貸す","かす","Meminjamkan (v)"],
+[714,"貸し出し","かしだし","Peminjaman"],
+[715,"貸家","かしや","Rumah disewakan"],
+
+// --- 事 (Hal/Peristiwa) ---
+[472,"事","こと - じ","Hal/Peristiwa"],
+
+
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 24. INFORMASI & PENJELASAN
+// 23. INFORMASI & PENJELASAN
 //     Logika: Umum→Spesifik
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1278,19 +1325,11 @@ const KANJI_DATA = [
 // 注 (Perhatian)
 [337,"注","そそ - ちゅう","Perhatian/Menuang"],
 [338,"注意する","ちゅういする","Berhati-hati"],
-[339,"注文する","ちゅうもんする","Memesan"],
 
-// --- 方 (Cara) — dari cat.25 ---
-[238,"方","かた - ほう","Cara/Arah"],
-[240,"方法","ほうほう","Metode"],
-
-// --- 事 (Hal) — dari cat.25 ---
-[472,"事","こと - じ","Hal/Peristiwa"],
-[473,"事故","じこ","Kecelakaan"],
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 25. KEHIDUPAN SEHARI-HARI
+// 24. KEHIDUPAN SEHARI-HARI
 //     Logika: Alur harian (Istirahat→Pakaian→Mandi→Tidur)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1308,7 +1347,4 @@ const KANJI_DATA = [
 // 浴 (Mandi)
 [623,"浴","あ - よく","Mandi/Berendam"],
 [624,"浴びる","あびる","Mandi (v)"],
-
-// --- 紙 (Kertas) — dari cat.25 ---
-[262,"紙","かみ - し","Kertas"],
 ];
