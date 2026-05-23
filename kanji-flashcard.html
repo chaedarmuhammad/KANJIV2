@@ -1028,6 +1028,13 @@
         return '<span class="kana-on">' + on + '</span>';
       }
     }
+    // Handle format "- onyomi" (starts with dash, no space before)
+    if (kanaStr.match(/^- /)) {
+      var onReading = kanaStr.substring(2).trim();
+      if (onReading) {
+        return '<span class="kana-on">' + onReading + '</span>';
+      }
+    }
     return kanaStr;
   }
 
@@ -1070,9 +1077,10 @@
       const kanji = entry[1];
       const kana = entry[2];
       
-      // A parent must be a single kanji AND have " - " in its kana (kunyomi - onyomi format)
+      // A parent must be a single kanji AND have reading pair format in its kana
+      // Format: "kunyomi - onyomi" OR "- onyomi" (only onyomi) OR "kunyomi -" (only kunyomi)
       const isSingleKanji = kanji.length === 1;
-      const hasReadingPair = kana.indexOf(' - ') !== -1;
+      const hasReadingPair = kana.indexOf(' - ') !== -1 || kana.match(/^- /) !== null;
       const isParent = isSingleKanji && hasReadingPair;
       
       if (isParent) {
