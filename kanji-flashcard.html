@@ -332,6 +332,9 @@
     color: var(--text2);
     font-weight: 300;
   }
+  .kana-kun { color: #6dbf8a; }
+  .kana-on { color: #7baaf7; }
+  .kana-sep { color: var(--text3); margin: 0 2px; }
   .kanji-parent-meaning {
     font-size: 12px;
     color: var(--text3);
@@ -693,6 +696,9 @@
     color: var(--text2);
     font-weight: 300;
   }
+  .answer-kana .kana-kun { color: #6dbf8a; }
+  .answer-kana .kana-on { color: #7baaf7; }
+  .answer-kana .kana-sep { color: var(--text3); }
   .answer-kanji {
     font-family: var(--font-jp);
     font-size: 40px;
@@ -1009,6 +1015,14 @@
     return Math.max(min, Math.min(max, value));
   }
 
+  function formatKana(kanaStr) {
+    if (kanaStr.indexOf(' - ') !== -1) {
+      var parts = kanaStr.split(' - ');
+      return '<span class="kana-kun">' + parts[0] + '</span><span class="kana-sep"> - </span><span class="kana-on">' + parts[1] + '</span>';
+    }
+    return kanaStr;
+  }
+
   function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(function(screen) {
       screen.classList.remove('active');
@@ -1111,7 +1125,7 @@
       
       html += '<span class="kanji-parent-char">' + parent[1] + '</span>';
       html += '<div class="kanji-parent-info">';
-      html += '<span class="kanji-parent-kana">' + parent[2] + '</span>';
+      html += '<span class="kanji-parent-kana">' + formatKana(parent[2]) + '</span>';
       html += '<span class="kanji-parent-meaning">' + parent[3] + '</span>';
       html += '</div>';
       
@@ -1310,11 +1324,11 @@
     if (currentCardMode === 'k2a') {
       dom.cardMain.textContent = currentEntry[1];
       dom.cardMain.className = 'card-main';
-      dom.cardSub.textContent = '';
+      dom.cardSub.innerHTML = '';
     } else {
       dom.cardMain.textContent = currentEntry[3];
       dom.cardMain.className = 'card-main latin';
-      dom.cardSub.textContent = currentEntry[2];
+      dom.cardSub.innerHTML = formatKana(currentEntry[2]);
     }
     dom.cardAnswer.className = 'card-answer';
     dom.flipHint.style.display = 'block';
@@ -1328,14 +1342,15 @@
     if (isFlipped) return;
     isFlipped = true;
     var currentEntry = deck[currentIndex];
+    var kanaHtml = formatKana(currentEntry[2]);
     if (currentCardMode === 'k2a') {
       dom.answerContent.innerHTML =
         '<div class="answer-main">' + currentEntry[3] + '</div>' +
-        '<div class="answer-kana">' + currentEntry[2] + '</div>';
+        '<div class="answer-kana">' + kanaHtml + '</div>';
     } else {
       dom.answerContent.innerHTML =
         '<div class="answer-kanji">' + currentEntry[1] + '</div>' +
-        '<div class="answer-kana">' + currentEntry[2] + '</div>';
+        '<div class="answer-kana">' + kanaHtml + '</div>';
     }
     dom.cardAnswer.className = 'card-answer visible';
     dom.flipHint.style.display = 'none';
