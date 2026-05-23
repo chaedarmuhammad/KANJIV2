@@ -1018,7 +1018,15 @@
   function formatKana(kanaStr) {
     if (kanaStr.indexOf(' - ') !== -1) {
       var parts = kanaStr.split(' - ');
-      return '<span class="kana-kun">' + parts[0] + '</span><span class="kana-sep"> - </span><span class="kana-on">' + parts[1] + '</span>';
+      var kun = parts[0].trim();
+      var on = parts[1].trim();
+      if (kun && on) {
+        return '<span class="kana-kun">' + kun + '</span><span class="kana-sep"> - </span><span class="kana-on">' + on + '</span>';
+      } else if (kun && !on) {
+        return '<span class="kana-kun">' + kun + '</span>';
+      } else if (!kun && on) {
+        return '<span class="kana-on">' + on + '</span>';
+      }
     }
     return kanaStr;
   }
