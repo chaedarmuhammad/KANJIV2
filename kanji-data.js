@@ -374,18 +374,27 @@ const KANJI_DATA = [
 [364,"低い","ひくい","Rendah (adj)"],
 [365,"低温","ていおん","Suhu rendah"],
 
-// --- 長↔短 (Panjang — pasangan 短 belum ada di data) ---
+// --- 長↔短 (Panjang↔Pendek) ---
 // 長 (Panjang)
 [334,"長","なが","Panjang"],
 [335,"長男","ちょうなん","Anak laki-laki pertama"],
 [336,"長い","ながい","Panjang"],
+// 短 (Pendek)
+[688,"短","たん","Pendek"],
+[689,"短い","みじかい","Pendek (adj)"],
+[690,"短所","たんしょ","Kekurangan"],
+[691,"短期","たんき","Jangka pendek"],
 
-// --- 広 (Luas) ---
+// --- 広↔狭 (Luas↔Sempit) ---
 // 広 (Luas)
 [625,"広","ひろ","Luas"],
 [626,"広い","ひろい","Luas (adj)"],
 [627,"広さ","ひろさ","Luas (noun)"],
 [628,"広島","ひろしま","Hiroshima"],
+// 狭 (Sempit)
+[692,"狭","せま","Sempit"],
+[693,"狭い","せまい","Sempit (adj)"],
+[694,"狭さ","せまさ","Sempitnya"],
 
 // --- 多↔少 (Banyak↔Sedikit) ---
 // 多 (Banyak)
@@ -414,9 +423,14 @@ const KANJI_DATA = [
 [547,"古","ふる","Lama"],
 [548,"古い","ふるい","Lama/Tua (adj)"],
 
-// --- 早 (Cepat) ---
+// --- 早↔遅 (Cepat↔Lambat) ---
 [451,"早","はや","Cepat"],
 [452,"早い","はやい","Cepat/Pagi (adj)"],
+// 遅 (Lambat)
+[695,"遅","おそ","Lambat"],
+[696,"遅い","おそい","Lambat (adj)"],
+[697,"遅れる","おくれる","Terlambat"],
+[698,"遅刻する","ちこくする","Terlambat (formal)"],
 
 // --- 太 (Gemuk/Tebal) ---
 [268,"太","ふとい","Gemuk/Tebal"],
@@ -436,11 +450,15 @@ const KANJI_DATA = [
 //    Logika: Pasangan lawan arti + Umum→Spesifik
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-// --- 明↔悪 (Terang/Baik↔Buruk) ---
+// --- 明↔暗 (Terang↔Gelap) ---
 // 明 (Terang)
 [316,"明","あかり","Terang"],
 [317,"明るい","あかるい","Terang/Ceria (adj)"],
 [319,"明らか","あきらか","Jelas"],
+// 暗 (Gelap)
+[709,"暗","あん","Gelap"],
+[710,"暗い","くらい","Gelap (adj)"],
+[711,"暗記する","あんきする","Menghafal"],
 // 悪 (Buruk)
 [345,"悪","わる","Buruk"],
 [346,"悪い","わるい","Buruk/Jahat (adj)"],
@@ -596,6 +614,10 @@ const KANJI_DATA = [
 // 若 (Muda)
 [309,"若","わかい","Muda"],
 [310,"若者","わかもの","Anak muda"],
+// 老 (Tua)
+[699,"老","ろう","Tua"],
+[700,"老人","ろうじん","Orang tua"],
+[701,"老後","ろうご","Masa tua"],
 
 // --- Keluarga (Pasangan: 兄↔弟, 姉↔妹) ---
 // 兄 (Kakak laki) ↔ 弟 (Adik laki)
@@ -607,6 +629,10 @@ const KANJI_DATA = [
 [193,"妹","いもうと","Adik perempuan"],
 // 妻 (Istri)
 [251,"妻","つま","Istri"],
+// 夫 (Suami)
+[702,"夫","おっと","Suami"],
+[703,"夫婦","ふうふ","Pasangan suami istri"],
+[704,"夫人","ふじん","Nyonya"],
 // 赤ちゃん (Bayi) — dipindah dari Warna ke sini
 [186,"赤ちゃん","あかちゃん","Bayi"],
 
@@ -775,6 +801,11 @@ const KANJI_DATA = [
 // 送 (Kirim)
 [293,"送","おく","Kirim"],
 [294,"送る","おくる","Kirim"],
+// 届 (Sampai/Terkirim)
+[716,"届","とど","Sampai"],
+[717,"届く","とどく","Sampai"],
+[718,"届ける","とどける","Menyampaikan"],
+[719,"届け","とどけ","Laporan/Pemberitahuan"],
 // 返 (Kembali/Kembalikan)
 [565,"返","かえ","Kembali"],
 [566,"返事","へんじ","Jawaban"],
@@ -786,6 +817,12 @@ const KANJI_DATA = [
 // 押 (Tekan)
 [596,"押","お","Tekan"],
 [597,"押す","おす","Menekan"],
+// 引 (Tarik)
+[720,"引","ひ","Tarik"],
+[721,"引く","ひく","Menarik"],
+[722,"引き出し","ひきだし","Laci"],
+[723,"引っ越す","ひっこす","Pindah rumah"],
+[724,"引っ越し","ひっこし","Pindahan"],
 // 洗 (Cuci)
 [466,"洗","あら","Cuci"],
 [467,"洗う","あらう","Mencuci"],
@@ -985,6 +1022,11 @@ const KANJI_DATA = [
 [681,"借","しゃく","Pinjam"],
 [682,"借りる","かりる","Meminjam"],
 [683,"借家","しゃくや","Rumah sewaan"],
+// 貸 (Meminjamkan)
+[712,"貸","たい","Meminjamkan"],
+[713,"貸す","かす","Meminjamkan"],
+[714,"貸し出し","かしだし","Peminjaman"],
+[715,"貸家","かしや","Rumah sewaan (disewakan)"],
 
 // --- 世 (Dunia) — dari cat.25 ---
 [617,"世","せ","Dunia"],
@@ -1067,6 +1109,11 @@ const KANJI_DATA = [
 [654,"売","う","Jual"],
 [655,"売る","うる","Menjual"],
 [656,"売店","ばいてん","Toko"],
+// 買 (Beli)
+[684,"買","か","Beli"],
+[685,"買う","かう","Membeli"],
+[686,"買い物","かいもの","Belanja"],
+[687,"買い物する","かいものする","Berbelanja"],
 
 // --- Uang ---
 // 金 (Uang)
@@ -1126,10 +1173,16 @@ const KANJI_DATA = [
 [290,"知らせる","しらせる","Memberitahu"],
 [291,"知り合い","しりあい","Kenalan"],
 [292,"知識","ちしき","Pengetahuan"],
+// --- Pasangan lawan: 好↔嫌 (Suka↔Benci) ---
 // 好 (Suka)
 [533,"好","す","Suka"],
 [534,"好きな","すきな","Suka"],
 [535,"好み","このみ","Kesukaan"],
+// 嫌 (Benci)
+[705,"嫌","きら","Benci"],
+[706,"嫌い","きらい","Benci (adj)"],
+[707,"嫌な","いやな","Tidak suka"],
+[708,"嫌がる","いやがる","Enggan"],
 // 気 (Semangat/Perasaan)
 [549,"気","き","Semangat/Udara"],
 [550,"気持ち","きもち","Perasaan"],
