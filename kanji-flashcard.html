@@ -1057,10 +1057,10 @@
   // ── Kanji List / Hierarchy Logic ──
   function buildKanjiHierarchy() {
     // Strategy: iterate through KANJI_DATA in order.
-    // A "parent" kanji is one where the kanji field is a single character
-    // (or has a special marker like "?" in kana meaning it's a root).
-    // Children are the entries that follow until the next parent.
-    // We group sequentially: a parent is followed by its derivatives.
+    // A "parent" kanji is one that has the format "kunyomi - onyomi" in its kana field.
+    // This means it contains " - " separator. Single-character kanji WITHOUT " - "
+    // are treated as derivatives (children) of the previous parent.
+    // Multi-character entries are always children.
     
     const groups = [];
     let currentGroup = null;
@@ -1068,12 +1068,14 @@
     for (let i = 0; i < KANJI_DATA.length; i++) {
       const entry = KANJI_DATA[i];
       const kanji = entry[1];
+      const kana = entry[2];
       
-      // Determine if this is a parent (single kanji character)
-      // A parent has exactly 1 character in the kanji field
+      // A parent must be a single kanji AND have " - " in its kana (kunyomi - onyomi format)
       const isSingleKanji = kanji.length === 1;
+      const hasReadingPair = kana.indexOf(' - ') !== -1;
+      const isParent = isSingleKanji && hasReadingPair;
       
-      if (isSingleKanji) {
+      if (isParent) {
         // Start a new group
         if (currentGroup) {
           groups.push(currentGroup);
@@ -1152,7 +1154,7 @@
           html += '<div class="kanji-child">';
           html += '<span class="kanji-child-tree">' + treeChar + '</span>';
           html += '<span class="kanji-child-char">' + child[1] + '</span>';
-          html += '<span class="kanji-child-kana">' + child[2] + '</span>';
+          html += '<span class="kanji-child-kana">' + formatKana(child[2]) + '</span>';
           html += '<span class="kanji-child-meaning">' + child[3] + '</span>';
           html += '<span class="kanji-child-no">#' + child[0] + '</span>';
           html += '</div>';
