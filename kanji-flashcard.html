@@ -449,8 +449,6 @@
     </div>
   </div>
 
-
-
   <div>
     <p class="section-title">Mode kuis</p>
     <div class="panel">
@@ -952,7 +950,6 @@
   let unknownCards = [];
   let isShuffleOn = false;
   let currentCardMode = 'k2a';
-  let currentTab = 'flashcard';
 
   // ── DOM Cache ──
   const dom = {
@@ -1021,7 +1018,6 @@
 
   // ── Tab Navigation ──
   function switchTab(tab) {
-    currentTab = tab;
     document.querySelectorAll('.tab-btn').forEach(function(btn) {
       btn.classList.remove('active');
     });
@@ -1086,7 +1082,6 @@
     const query = (searchQuery || '').toLowerCase().trim();
     
     let html = '';
-    let parentCount = 0;
     let childCount = 0;
     let visibleGroups = 0;
 
@@ -1102,7 +1097,6 @@
       }
 
       visibleGroups++;
-      parentCount++;
       const hasChildren = children.length > 0;
 
 
